@@ -1,0 +1,13 @@
+stdlib = import "./rpsh_stdlib.rpsh";
+
+("Hello %s %s %s%n", ["RePolish", "Shell", 1024]) -> $stdlib.printf;
+
+input = () -> $stdlib.read;
+
+result = if ($input == "hello") {
+    return "Input is hello";
+} else {
+    return "Input is not hello";
+};
+
+$result -> $stdlib.println;
