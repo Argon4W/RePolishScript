@@ -4,4 +4,5 @@ public interface INumericStackValue extends IAddableStackValue, IEquatableStackV
     IStackValue subtract(IStackValue right);
     IStackValue multiply(IStackValue right);
     IStackValue divide(IStackValue right);
+    IStackValue mod(IStackValue right);
 }

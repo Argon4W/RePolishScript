@@ -1,14 +1,15 @@
-package com.github.argon4w.rpsh.syntactic.nodes;
+package com.github.argon4w.rpsh.syntactic.nodes.assign;
 
-import com.github.argon4w.rpsh.runtime.instrutions.AssignInstruction;
 import com.github.argon4w.rpsh.runtime.instrutions.IInstruction;
+import com.github.argon4w.rpsh.runtime.instrutions.assign.MultiplyAssignInstruction;
+import com.github.argon4w.rpsh.runtime.instrutions.assign.SubtractAssignInstruction;
 import com.github.argon4w.rpsh.syntactic.ISyntaxTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class AssignSyntaxTreeNode implements ISyntaxTreeNode {
+public class MultiplyAssignSyntaxTreeNode implements ISyntaxTreeNode {
     public ISyntaxTreeNode left;
     public ISyntaxTreeNode right;
 
@@ -24,7 +25,7 @@ public class AssignSyntaxTreeNode implements ISyntaxTreeNode {
 
         instructions.addAll(left.getInstructions());
         instructions.addAll(right.getInstructions());
-        instructions.add(new AssignInstruction());
+        instructions.add(new MultiplyAssignInstruction());
 
         return instructions;
     }
