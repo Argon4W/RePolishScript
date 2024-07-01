@@ -1,0 +1,7 @@
+stdlib = import "./rps_stdlib.rps";
+s = "Hello World";
+s2 = 0 to (len $s) step 2 in $s;
+$s2 -> $stdlib.println;
+
+list = ["this", "is", "a", "test"];
+$list -> $stdlib.listToString -> $stdlib.println;

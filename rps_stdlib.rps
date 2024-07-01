@@ -50,3 +50,17 @@ printf = (value, fmt) -> {
 read = () -> {
     return (call "read");
 };
+
+listToString = (list) -> {
+    if (len $list == 0) {
+        return "[]";
+    };
+
+    result = "[" + 0 in $list;
+
+    for (value in (1 to (len $list) in $list)) {
+        $result += ", " + $value;
+    };
+
+    return $result + "]";
+};

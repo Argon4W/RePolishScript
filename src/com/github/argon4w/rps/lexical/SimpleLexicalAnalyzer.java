@@ -6,11 +6,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class SimpleLexicalAnalyzer {
-    public static final Pattern HEX_CHARACTER_PATTERN = Pattern.compile("^[0-9A-Fa-f]$");
-    public static final Pattern OCT_CHARACTER_PATTERN = Pattern.compile("^[0-7]$");
-    public static final Pattern DEC_CHARACTER_PATTERN = Pattern.compile("^[0-9]$");
-    public static final Pattern FLOATING_POINT_NUMBER_CHARACTER_PATTERN = Pattern.compile("^[.eE]$");
-
     public final SimpleTokenHashMap operatorTokenMap;
     public final SimpleTokenHashMap keywordTokenMap;
     private final List<IToken> tokens;
@@ -346,7 +341,7 @@ public class SimpleLexicalAnalyzer {
     }
 
     public boolean isFloatingPointNumberCharacter(char c) {
-        return FLOATING_POINT_NUMBER_CHARACTER_PATTERN.matcher(String.valueOf(c)).matches();
+        return c == '.' || c == 'e' || c == 'E';
     }
 
     public boolean isDoubleQuotedStringStateEnter() {
@@ -406,14 +401,14 @@ public class SimpleLexicalAnalyzer {
     }
 
     public boolean isHexCharacter(char c) {
-        return HEX_CHARACTER_PATTERN.matcher(String.valueOf(c)).matches();
+        return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f');
     }
 
     public boolean isOctCharacter(char c) {
-        return OCT_CHARACTER_PATTERN.matcher(String.valueOf(c)).matches();
+        return c >= '0' && c <= '7';
     }
 
     public boolean isDecCharacter(char c) {
-        return DEC_CHARACTER_PATTERN.matcher(String.valueOf(c)).matches();
+        return c >= '0' && c <= '9';
     }
 }

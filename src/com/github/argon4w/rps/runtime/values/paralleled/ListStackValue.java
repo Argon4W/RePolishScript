@@ -9,20 +9,23 @@ import com.github.argon4w.rps.runtime.values.primitive.UndefinedStackValue;
 import com.github.argon4w.rps.runtime.values.referenced.ListElementStackValue;
 import com.github.argon4w.rps.runtime.values.slice.ListSliceStackValue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ListStackValue extends ParalleledStackValue implements IAddableStackValue, IListStackValue {
+public class ListStackValue implements IAddableStackValue, IListStackValue {
+    public final List<IStackValue> values;
+
     public ListStackValue() {
-        super(List.of());
+        this.values = new ArrayList<>();
     }
 
     public ListStackValue(List<IStackValue> values) {
-        super(values);
+        this.values = new ArrayList<>(values);
     }
 
     public ListStackValue(List<IStackValue> values, IStackValue appendValue) {
-        super(values);
+        this(values);
 
         if (appendValue instanceof ListStackValue listValue) {
             this.values.addAll(List.copyOf(listValue.values()));
