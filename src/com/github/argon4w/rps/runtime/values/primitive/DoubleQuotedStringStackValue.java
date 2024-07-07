@@ -42,6 +42,10 @@ public class DoubleQuotedStringStackValue implements IStringStackValue {
         this(new IntArraySlice(codePoint1), new IntArraySlice(string.codePoints().toArray()));
     }
 
+    public DoubleQuotedStringStackValue(String string, int codePoint2) {
+        this(new IntArraySlice(string.codePoints().toArray()), new IntArraySlice(codePoint2));
+    }
+
     @Override
     public String value() {
         return new String(codePoints.source, 0, codePoints.length);

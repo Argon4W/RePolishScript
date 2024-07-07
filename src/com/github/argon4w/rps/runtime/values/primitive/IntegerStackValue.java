@@ -9,8 +9,16 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
             return new SingleQuotedStringStackValue(value + stringStackValue.value());
         }
 
+        if (right instanceof WideCharacterStackValue characterValue) {
+            return new SingleQuotedStringStackValue(getStringValue(), characterValue.codePoint());
+        }
+
         if (right instanceof IntegerStackValue integerStackValue) {
             return new IntegerStackValue(value + integerStackValue.value());
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value + byteValue.getLongValue());
         }
 
         if (right instanceof FloatingPointNumberStackValue floatingPointNumberStackValue) {
@@ -27,6 +35,10 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
             return new IntegerStackValue(value - integerStackValue.value());
         }
 
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value - byteValue.getLongValue());
+        }
+
         if (right instanceof FloatingPointNumberStackValue floatingPointNumberStackValue) {
             return new FloatingPointNumberStackValue(value - floatingPointNumberStackValue.value());
         }
@@ -38,6 +50,10 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
     public IStackValue multiply(IStackValue right) {
         if (right instanceof IntegerStackValue integerStackValue) {
             return new IntegerStackValue(value * integerStackValue.value());
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value * byteValue.getLongValue());
         }
 
         if (right instanceof FloatingPointNumberStackValue floatingPointNumberStackValue) {
@@ -53,6 +69,10 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
             return new IntegerStackValue(value / integerStackValue.value());
         }
 
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value / byteValue.getLongValue());
+        }
+
         if (right instanceof FloatingPointNumberStackValue floatingPointNumberStackValue) {
             return new FloatingPointNumberStackValue(value / floatingPointNumberStackValue.value());
         }
@@ -66,6 +86,10 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
             return new IntegerStackValue(value % integerStackValue.value());
         }
 
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value % byteValue.getLongValue());
+        }
+
         if (right instanceof FloatingPointNumberStackValue floatingPointNumberStackValue) {
             return new FloatingPointNumberStackValue(value % floatingPointNumberStackValue.value());
         }
@@ -75,29 +99,41 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
 
     @Override
     public IStackValue bitAnd(IStackValue right) {
-        if (!(right instanceof IntegerStackValue integerValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value & byteValue.getLongValue());
         }
 
-        return new IntegerStackValue(value & integerValue.value());
+        if (right instanceof IntegerStackValue integerValue) {
+            return new IntegerStackValue(value & integerValue.value());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override
     public IStackValue bitOr(IStackValue right) {
-        if (!(right instanceof IntegerStackValue integerValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value | byteValue.getLongValue());
         }
 
-        return new IntegerStackValue(value | integerValue.value());
+        if (right instanceof IntegerStackValue integerValue) {
+            return new IntegerStackValue(value | integerValue.value());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override
     public IStackValue bitXOR(IStackValue right) {
-        if (!(right instanceof IntegerStackValue integerValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value ^ byteValue.getLongValue());
         }
 
-        return new IntegerStackValue(value ^ integerValue.value());
+        if (right instanceof IntegerStackValue integerValue) {
+            return new IntegerStackValue(value ^ integerValue.value());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override
@@ -107,35 +143,51 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
 
     @Override
     public IStackValue bitLeftShift(IStackValue right) {
-        if (!(right instanceof IntegerStackValue integerValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value << byteValue.getLongValue());
         }
 
-        return new IntegerStackValue(value << integerValue.value());
+        if (right instanceof IntegerStackValue integerValue) {
+            return new IntegerStackValue(value << integerValue.value());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override
     public IStackValue bitRightShift(IStackValue right) {
-        if (!(right instanceof IntegerStackValue integerValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value >> byteValue.getLongValue());
         }
 
-        return new IntegerStackValue(value >> integerValue.value());
+        if (right instanceof IntegerStackValue integerValue) {
+            return new IntegerStackValue(value >> integerValue.value());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override
     public IStackValue bitUnsignedRightShift(IStackValue right) {
-        if (!(right instanceof IntegerStackValue integerValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof ByteStackValue byteValue) {
+            return new IntegerStackValue(value >>> byteValue.getLongValue());
         }
 
-        return new IntegerStackValue(value >>> integerValue.value());
+        if (right instanceof IntegerStackValue integerValue) {
+            return new IntegerStackValue(value >>> integerValue.value());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override
     public int compare(IStackValue right) {
         if (right instanceof FloatingPointNumberStackValue floatValue) {
             return Double.compare(value, floatValue.value());
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return Long.compare(value, byteValue.getLongValue());
         }
 
         if (right instanceof IntegerStackValue integerValue) {
@@ -149,6 +201,10 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
     public boolean equals(IStackValue right) {
         if (right instanceof FloatingPointNumberStackValue floatValue) {
             return value == floatValue.value();
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return value == byteValue.value();
         }
 
         if (right instanceof IntegerStackValue integerValue) {

@@ -5,11 +5,15 @@ import com.github.argon4w.rps.runtime.values.IStackValue;
 public record BooleanStackValue(boolean value) implements IAddableStackValue, IEquatableStackValue, IPrimitiveStackValue, IBitOperandStackValue {
     @Override
     public IStackValue add(IStackValue right) {
-        if (!(right instanceof IStringStackValue stringValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof IStringStackValue stringValue) {
+            return new SingleQuotedStringStackValue(getStringValue(), stringValue.codePoints());
         }
 
-        return new SingleQuotedStringStackValue(value + stringValue.value());
+        if (right instanceof WideCharacterStackValue characterValue) {
+            return new SingleQuotedStringStackValue(getStringValue(), characterValue.codePoint());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override

@@ -10,11 +10,15 @@ public class UndefinedStackValue implements IStackValue, IEquatableStackValue, I
 
     @Override
     public IStackValue add(IStackValue right) {
-        if (!(right instanceof IStringStackValue stringValue)) {
-            throw new IllegalStateException("Illegal right components");
+        if (right instanceof IStringStackValue stringValue) {
+            return new SingleQuotedStringStackValue("null", stringValue.codePoints());
         }
 
-        return new SingleQuotedStringStackValue("null", stringValue.codePoints());
+        if (right instanceof WideCharacterStackValue characterValue) {
+            return new SingleQuotedStringStackValue("null", characterValue.codePoint());
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override

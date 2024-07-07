@@ -1,12 +1,12 @@
  package com.github.argon4w.rps.syntactic.nodes.operands.type;
 
 import com.github.argon4w.rps.runtime.instrutions.operands.type.AbstractPushTypeInstruction;
-import com.github.argon4w.rps.runtime.instrutions.operands.type.PushRangeTypeInstruction;
 import com.github.argon4w.rps.runtime.instrutions.operands.type.PushStackTypeInstruction;
+import com.github.argon4w.rps.runtime.instrutions.operands.type.PushStringTypeInstruction;
 
- public class PushStackTypeSyntaxTreeNode extends AbstractPushTypeSyntaxTreeNode {
+ public class PushStringTypeSyntaxTreeNode extends AbstractPushTypeSyntaxTreeNode {
     @Override
     public AbstractPushTypeInstruction getTypeInstruction() {
-        return new PushStackTypeInstruction();
+        return new PushStringTypeInstruction();
     }
 }

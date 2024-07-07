@@ -2,14 +2,14 @@ package com.github.argon4w.rps.syntactic.nodes;
 
 import com.github.argon4w.rps.runtime.instrutions.AsInstruction;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.instrutions.ParalleledInstruction;
+import com.github.argon4w.rps.runtime.instrutions.IsInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class AsSyntaxTreeNode implements ISyntaxTreeNode {
+public class IsSyntaxTreeNode implements ISyntaxTreeNode {
     public ISyntaxTreeNode left;
     public ISyntaxTreeNode right;
 
@@ -25,7 +25,7 @@ public class AsSyntaxTreeNode implements ISyntaxTreeNode {
 
         instructions.addAll(left.getInstructions());
         instructions.addAll(right.getInstructions());
-        instructions.add(new AsInstruction());
+        instructions.add(new IsInstruction());
 
         return instructions;
     }

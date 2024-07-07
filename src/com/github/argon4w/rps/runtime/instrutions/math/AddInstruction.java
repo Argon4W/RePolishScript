@@ -12,7 +12,6 @@ public class AddInstruction implements IInstruction {
         IStackValue left = stack.pop();
 
         if (!(left instanceof IAddableStackValue addableLeft)) {
-            System.out.println(left);
             throw new IllegalStateException("Illegal left components");
         }
 

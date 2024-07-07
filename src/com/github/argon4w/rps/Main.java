@@ -4,7 +4,7 @@ import com.github.argon4w.rps.runtime.RuntimeStack;
 
 public class Main {
     public static void main(String[] args) throws Throwable {
-        RuntimeStack stack = new RePolishRuntime().importRuntimeStack("./rps_test_version_string.rps");
+        RuntimeStack stack = new RePolishRuntime().importRuntimeStack("./rps_test_version_ice_cream.rps");
         stack.invoke();
     }
 }

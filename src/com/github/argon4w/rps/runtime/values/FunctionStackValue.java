@@ -25,6 +25,7 @@ public class FunctionStackValue implements IStackValue {
 
         for (IStackValue value : values) {
             if (!(value instanceof NameStackValue nameValue)) {
+                System.out.println(value);
                 throw new IllegalStateException("Illegal parameter definition");
             }
 

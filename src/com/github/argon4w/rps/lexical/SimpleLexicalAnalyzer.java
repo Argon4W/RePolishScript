@@ -4,7 +4,7 @@ import com.github.argon4w.rps.lexical.tokens.*;
 
 import java.util.*;
 
-public class SimpleLexicalAnalyzerWithRadix {
+public class SimpleLexicalAnalyzer {
     public final SimpleTokenHashMap operatorTokenMap;
     public final SimpleTokenHashMap keywordTokenMap;
     private final List<IToken> tokens;
@@ -33,7 +33,7 @@ public class SimpleLexicalAnalyzerWithRadix {
     public char[] characters;
     public int index;
 
-    public SimpleLexicalAnalyzerWithRadix(SimpleTokenHashMap operatorTokenMap, SimpleTokenHashMap keywordTokenMap) {
+    public SimpleLexicalAnalyzer(SimpleTokenHashMap operatorTokenMap, SimpleTokenHashMap keywordTokenMap) {
         this.operatorTokenMap = operatorTokenMap;
         this.keywordTokenMap = keywordTokenMap;
         this.tokens = new ArrayList<>();
@@ -405,7 +405,7 @@ public class SimpleLexicalAnalyzerWithRadix {
     }
 
     public boolean isFloatingPointNumberStateEnter() {
-        return integerNumberState && isFloatingPointNumberCharacter(characters[index]) && !isRangeOperatorException();
+        return integerNumberState && isFloatingPointNumberCharacter(characters[index]);
     }
 
     public boolean isOctIntegerNumberStateEnter() {
@@ -421,27 +421,23 @@ public class SimpleLexicalAnalyzerWithRadix {
     }
 
     public boolean isIntegerNumberStateExit() {
-        return integerNumberState && (!isDecCharacter(characters[index]) || isRangeOperatorException());
+        return integerNumberState && !isDecCharacter(characters[index]);
     }
 
     public boolean isOctIntegerNumberStateExit() {
-        return octIntegerNumberState && (!isOctCharacter(characters[index]) || isRangeOperatorException());
+        return octIntegerNumberState && !isOctCharacter(characters[index]);
     }
 
     public boolean isBinIntegerNumberStateExit() {
-        return binIntegerNumberState && (!isBinCharacter(characters[index]) || isRangeOperatorException());
+        return binIntegerNumberState && !isBinCharacter(characters[index]);
     }
 
     public boolean isHexIntegerNumberStateExit() {
-        return hexIntegerNumberState && (!isHexCharacter(characters[index]) || isRangeOperatorException());
+        return hexIntegerNumberState && !isHexCharacter(characters[index]);
     }
 
     public boolean isFloatingPointNumberStateExit() {
         return floatingPointNumberState && !isFloatingPointNumberCharacter(characters[index]) && !isDecCharacter(characters[index]);
-    }
-
-    public boolean isRangeOperatorException() {
-        return hasMore(2) && characters[index] == '.' && characters[index + 1] == '.';
     }
 
     public boolean isFloatingPointNumberCharacter(char c) {

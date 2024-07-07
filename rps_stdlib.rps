@@ -9,6 +9,11 @@ println = (value) -> {
 };
 
 printf = (value, fmt) -> {
+    push ($value, $fmt) -> $sprintf;
+    call "write";
+};
+
+sprintf = (value, fmt) -> {
     index = 0;
     result = "";
     state = false;
@@ -43,22 +48,21 @@ printf = (value, fmt) -> {
         };
     };
 
-    push $result;
-    call "write";
+    return $result;
 };
 
 read = () -> {
     return (call "read");
 };
 
-listToString = (list) -> {
-    if (len $list == 0) {
+listToString = (listValue) -> {
+    if (len $listValue == 0) {
         return "[]";
     };
 
-    result = "[" + 0 in $list;
+    result = "[" + 0 in $listValue;
 
-    for (value in (1 to (len $list) in $list)) {
+    for (value in (1 to (len $listValue) in $listValue)) {
         $result += ", " + $value;
     };
 

@@ -2,8 +2,9 @@ package com.github.argon4w.rps.lexical.tokens.operators;
 
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
 import com.github.argon4w.rps.syntactic.nodes.AsSyntaxTreeNode;
+import com.github.argon4w.rps.syntactic.nodes.IsSyntaxTreeNode;
 
-public class AsOperatorToken implements IOperatorToken {
+public class IsOperatorToken implements IOperatorToken {
     @Override
     public int getPriority() {
         return 19;
@@ -11,6 +12,6 @@ public class AsOperatorToken implements IOperatorToken {
 
     @Override
     public ISyntaxTreeNode getSyntaxTreeNode() {
-        return new AsSyntaxTreeNode();
+        return new IsSyntaxTreeNode();
     }
 }

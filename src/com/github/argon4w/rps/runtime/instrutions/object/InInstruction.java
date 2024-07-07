@@ -9,6 +9,7 @@ import com.github.argon4w.rps.runtime.values.loop.LoopListStackValue;
 import com.github.argon4w.rps.runtime.values.loop.LoopRangeStackValue;
 import com.github.argon4w.rps.runtime.values.loop.LoopStackStackValue;
 import com.github.argon4w.rps.runtime.values.paralleled.ParalleledStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.ByteStackValue;
 import com.github.argon4w.rps.runtime.values.primitive.IRangeStackValue;
 import com.github.argon4w.rps.runtime.values.primitive.IStringStackValue;
 import com.github.argon4w.rps.runtime.values.primitive.IntegerStackValue;
@@ -38,6 +39,11 @@ public class InInstruction implements IInstruction {
         }
 
         if (right instanceof IListStackValue listRight) {
+            if (left instanceof ByteStackValue byteValue) {
+                stack.push(listRight.getSingle(byteValue.value()));
+                return false;
+            }
+
             if (left instanceof IntegerStackValue integerLeft) {
                 stack.push(listRight.getSingle((int) integerLeft.value()));
                 return false;

@@ -3,6 +3,7 @@ package com.github.argon4w.rps.runtime.instrutions.list;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.values.IStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.ByteStackValue;
 import com.github.argon4w.rps.runtime.values.primitive.IntegerStackValue;
 import com.github.argon4w.rps.runtime.values.primitive.SimpleRangeStackValue;
 
@@ -12,15 +13,34 @@ public class RangeInstruction implements IInstruction {
         IStackValue right = stack.pop();
         IStackValue left = stack.pop();
 
-        if (!(right instanceof IntegerStackValue integerRight)) {
-            throw new IllegalStateException("Illegal right components");
-        }
+        if (right instanceof IntegerStackValue integerRight) {
+            if (left instanceof IntegerStackValue integerLeft) {
+                stack.push(new SimpleRangeStackValue(integerLeft.value(), integerRight.value()));
+                return false;
+            }
 
-        if (!(left instanceof IntegerStackValue integerLeft)) {
+            if (left instanceof ByteStackValue byteLeft) {
+                stack.push(new SimpleRangeStackValue(byteLeft.value(), integerRight.value()));
+                return false;
+            }
+
             throw new IllegalStateException("Illegal left components");
         }
 
-        stack.push(new SimpleRangeStackValue(integerLeft.value(), integerRight.value()));
-        return false;
+        if (right instanceof ByteStackValue byteRight) {
+            if (left instanceof IntegerStackValue integerLeft) {
+                stack.push(new SimpleRangeStackValue(integerLeft.value(), byteRight.value()));
+                return false;
+            }
+
+            if (left instanceof ByteStackValue byteLeft) {
+                stack.push(new SimpleRangeStackValue(byteLeft.value(), byteLeft.value()));
+                return false;
+            }
+
+            throw new IllegalStateException("Illegal left components");
+        }
+
+        throw new IllegalStateException("Illegal right components");
     }
 }

@@ -2,10 +2,21 @@ package com.github.argon4w.rps.runtime.values.type;
 
 import com.github.argon4w.rps.runtime.values.IStackValue;
 import com.github.argon4w.rps.runtime.values.ITypeStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.IStringStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.WideCharacterStackValue;
 
-public class IntegerTypeStackValue implements ITypeStackValue {
+public class StringTypeStackValue implements ITypeStackValue {
     @Override
     public IStackValue convert(IStackValue value) {
+        if (value instanceof IStringStackValue) {
+            return value;
+        }
+
         throw new IllegalStateException("Illegal type");
+    }
+
+    @Override
+    public boolean is(IStackValue value) {
+        return value instanceof IStringStackValue;
     }
 }

@@ -1,12 +1,12 @@
 package com.github.argon4w.rps.runtime.instrutions.operands.type;
 
 import com.github.argon4w.rps.runtime.values.ITypeStackValue;
-import com.github.argon4w.rps.runtime.values.type.ByteTypeStackValue;
 import com.github.argon4w.rps.runtime.values.type.FloatingPointNumberTypeStackValue;
+import com.github.argon4w.rps.runtime.values.type.FunctionTypeStackValue;
 
-public class PushFloatingPointNumberTypeInstruction extends AbstractPushTypeInstruction {
+public class PushFunctionTypeInstruction extends AbstractPushTypeInstruction {
     @Override
-    ITypeStackValue getTypeStackValue() {
-        return new FloatingPointNumberTypeStackValue();
+    public ITypeStackValue getTypeStackValue() {
+        return new FunctionTypeStackValue();
     }
 }

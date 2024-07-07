@@ -1,12 +1,12 @@
 package com.github.argon4w.rps.runtime.instrutions.operands.type;
 
 import com.github.argon4w.rps.runtime.values.ITypeStackValue;
-import com.github.argon4w.rps.runtime.values.type.NumberTypeStackValue;
 import com.github.argon4w.rps.runtime.values.type.RangeTypeStackValue;
+import com.github.argon4w.rps.runtime.values.type.StringTypeStackValue;
 
-public class PushRangeTypeInstruction extends AbstractPushTypeInstruction {
+public class PushStringTypeInstruction extends AbstractPushTypeInstruction {
     @Override
-    ITypeStackValue getTypeStackValue() {
-        return new RangeTypeStackValue();
+    public ITypeStackValue getTypeStackValue() {
+        return new StringTypeStackValue();
     }
 }

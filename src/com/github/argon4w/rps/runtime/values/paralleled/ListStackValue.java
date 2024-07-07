@@ -2,10 +2,7 @@ package com.github.argon4w.rps.runtime.values.paralleled;
 
 import com.github.argon4w.rps.runtime.values.IListStackValue;
 import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IAddableStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IRangeStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IntegerStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.UndefinedStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.*;
 import com.github.argon4w.rps.runtime.values.referenced.ListElementStackValue;
 import com.github.argon4w.rps.runtime.values.slice.ListSliceStackValue;
 
@@ -20,7 +17,7 @@ public class ListStackValue implements IAddableStackValue, IListStackValue {
         this.values = new ArrayList<>();
     }
 
-    public ListStackValue(List<IStackValue> values) {
+    public ListStackValue(List<? extends IStackValue> values) {
         this.values = new ArrayList<>(values);
     }
 
@@ -108,6 +105,10 @@ public class ListStackValue implements IAddableStackValue, IListStackValue {
     public IntStream getIndex(IStackValue value) {
         if (value instanceof IRangeStackValue rangeValue) {
             return rangeValue.getNumbers();
+        }
+
+        if (value instanceof ByteStackValue byteValue) {
+            return IntStream.of(byteValue.value());
         }
 
         if (value instanceof IntegerStackValue integerValue) {

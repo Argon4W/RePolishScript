@@ -1,8 +1,74 @@
 stdlib = import "./rps_stdlib.rps";
 
-a = 0.4; //sugar ratio: sugarRatio a
-b = 0.15; //sugar ratio in the sorbet: b
-c = 700; //the weight of sorbet in grams
-x = $c / ($a + $a / $b); //syrup needed: x
+/*
+sugarRatioInSyrup = 0.58; //sugar ratio in the syrup;
 
-("The syrup needed in the sorbet is : %s%n", [$x]) -> $stdlib.printf;
+nonfatMilkSolidRatioInMilk = 0.075; //non-fat milk solid ratio in the milk;
+fatRatioInMilk = 0.044; //fat ratio in the milk;
+waterRatioInMilk = 0.881; //water ratio in the milk;
+
+nonfatMilkSolidRatioInLightCream = 0.046; //non-fat milk solid ratio in the light cream;
+fatRatioInLightCream = 0.336; //fat ratio in the light cream;
+waterRatioInLightCream = 0.618; //water ratio in the light cream;
+
+weightOfIceCream = 700; //total weight of the ice cream in grams;
+solidsRatioInIceCream = 0.2; //solids ratio in the ice cream;
+fatRatioInIceCream = 0.1; //fat ratio in the ice cream;
+waterRatioInIceCream = 0.6; //water ratio in the ice cream;
+sugarRatioInWater = 0.15; //sugar ratio in the water;
+
+weightOfExtraIngredient = 30; //weight of extra ingredient in the ice cream in grams;
+waterRatioInExtraIngredient = 0.5; //water ratio in the extra ingredient;
+fatRatioInExtraIngredient = 0.175; //fat ratio in the extra ingredient;
+solidsRatioInExtraIngredient = 0.5; //solids ratio in the extra ingredient
+*/
+
+sugarRatioInSyrup = 1; //sugar ratio in the syrup;
+
+nonfatMilkSolidRatioInMilk = 0.075; //non-fat milk solid ratio in the milk;
+fatRatioInMilk = 0.044; //fat ratio in the milk;
+waterRatioInMilk = 0.881; //water ratio in the milk;
+
+nonfatMilkSolidRatioInLightCream = 0.046; //non-fat milk solid ratio in the light cream;
+fatRatioInLightCream = 0.336; //fat ratio in the light cream;
+waterRatioInLightCream = 0.618; //water ratio in the light cream;
+
+weightOfIceCream = 400; //total weight of the ice cream in grams;
+solidsRatioInIceCream = 0.15; //solids ratio in the ice cream;
+fatRatioInIceCream = 0.1; //fat ratio in the ice cream;
+waterRatioInIceCream = 0.65; //water ratio in the ice cream;
+sugarRatioInWater = 0.15; //sugar ratio in the water;
+
+weightOfExtraIngredient = 30; //weight of extra ingredient in the ice cream in grams;
+waterRatioInExtraIngredient = 0.5; //water ratio in the extra ingredient;
+fatRatioInExtraIngredient = 0.175; //fat ratio in the extra ingredient;
+solidsRatioInExtraIngredient = 0.5; //solids ratio in the extra ingredient
+
+weightOfWaterInExtraIngredient = $weightOfExtraIngredient * $waterRatioInExtraIngredient; //weight of extra water provided by other ingredient
+weightOfFatInExtraIngredient = $weightOfExtraIngredient * $fatRatioInExtraIngredient; //weight of extra fat provided by other ingredient
+weightOfSolidsInExtraIngredient = $weightOfExtraIngredient * $solidsRatioInExtraIngredient; //weight of extra soilds provided by other ingredient
+
+weightOfSugarInIceCream = $weightOfIceCream * $waterRatioInIceCream * $sugarRatioInWater; //total weight of sugar in the ice cream in grams;
+weightOfSyrupInIceCream = $weightOfSugarInIceCream / $sugarRatioInSyrup; //total weight of syrup in the ice cream in grams;
+weightOfWaterInSyrup = $weightOfSyrupInIceCream - $weightOfSugarInIceCream; //total weight of water brought by syrup in the ice cream in grams;
+
+weightOfWaterInIceCream = $weightOfIceCream * $waterRatioInIceCream - $weightOfWaterInSyrup - $weightOfWaterInExtraIngredient;
+weightOfFatInIceCream = $weightOfIceCream * $fatRatioInIceCream - $weightOfFatInExtraIngredient;
+
+a = $weightOfWaterInIceCream / $waterRatioInMilk;
+b = $waterRatioInLightCream / $waterRatioInMilk;
+
+c = $a * $fatRatioInMilk;
+d = $b * $fatRatioInMilk;
+
+e = $weightOfFatInIceCream - $c;
+f = $fatRatioInLightCream - $d;
+
+weightOfLightCreamInIceCream = $e / $f;
+weightOfMilkInIceCream = $a - $b * $weightOfLightCreamInIceCream;
+weightOfAdditionalSolidsInIceCream = $weightOfIceCream - $weightOfLightCreamInIceCream - $weightOfMilkInIceCream - $weightOfSyrupInIceCream -$weightOfExtraIngredient;
+
+("The weight of syrup in the ice cream is: %sg%n", [$weightOfSyrupInIceCream]) -> $stdlib.printf;
+("The weight of milk in the ice cream is: %sg%n", [$weightOfMilkInIceCream]) -> $stdlib.printf;
+("The weight of light cream in the ice cream is: %sg%n", [$weightOfLightCreamInIceCream]) -> $stdlib.printf;
+("The weight of additional solids in the ice cream is: %sg%n", [$weightOfAdditionalSolidsInIceCream]) -> $stdlib.printf;

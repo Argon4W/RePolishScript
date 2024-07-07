@@ -22,6 +22,7 @@ import com.github.argon4w.rps.lexical.tokens.operators.loop.ForOperatorToken;
 import com.github.argon4w.rps.lexical.tokens.operators.loop.WhileOperatorToken;
 import com.github.argon4w.rps.lexical.tokens.operators.math.*;
 import com.github.argon4w.rps.lexical.tokens.operators.object.*;
+import com.github.argon4w.rps.lexical.tokens.type.*;
 import com.github.argon4w.rps.runtime.RuntimeBuiltinFunctions;
 import com.github.argon4w.rps.runtime.RuntimeRootStack;
 import com.github.argon4w.rps.runtime.RuntimeStack;
@@ -116,6 +117,20 @@ public class RePolishRuntime {
         keywordMap.put("call", CallBuiltinOperatorToken::new);
         keywordMap.put("push", PushOperatorToken::new);
         keywordMap.put("import", ImportOperatorToken::new);
+        keywordMap.put("as", AsOperatorToken::new);
+        keywordMap.put("is", IsOperatorToken::new);
+
+        keywordMap.put("boolean", BooleanTypeToken::new);
+        keywordMap.put("byte", ByteTypeToken::new);
+        keywordMap.put("float", FloatingPointNumberTypeToken::new);
+        keywordMap.put("function", FunctionTypeToken::new);
+        keywordMap.put("integer", IntegerTypeToken::new);
+        keywordMap.put("list", ListTypeToken::new);
+        keywordMap.put("number", NumberTypeToken::new);
+        keywordMap.put("range", RangeTypeToken::new);
+        keywordMap.put("object", StackTypeToken::new);
+        keywordMap.put("string", StringTypeToken::new);
+        keywordMap.put("character", WideCharacterTypeToken::new);
 
         builtinFunctions.put("write", new WriteBuiltinCall());
         builtinFunctions.put("read", new ReadBuiltinCall());

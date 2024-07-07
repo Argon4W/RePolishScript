@@ -9,8 +9,16 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
             return new SingleQuotedStringStackValue(value + stringStackValue.value());
         }
 
+        if (right instanceof WideCharacterStackValue characterValue) {
+            return new SingleQuotedStringStackValue(getStringValue(), characterValue.codePoint());
+        }
+
         if (right instanceof IntegerStackValue integerStackValue) {
             return new FloatingPointNumberStackValue(value + integerStackValue.value());
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return new FloatingPointNumberStackValue(value + byteValue.getLongValue());
         }
 
         if (right instanceof FloatingPointNumberStackValue floatValue) {
@@ -26,6 +34,10 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
             return new FloatingPointNumberStackValue(value - integerStackValue.value());
         }
 
+        if (right instanceof ByteStackValue byteValue) {
+            return new FloatingPointNumberStackValue(value - byteValue.getLongValue());
+        }
+
         if (right instanceof FloatingPointNumberStackValue floatValue) {
             return new FloatingPointNumberStackValue(value - floatValue.value());
         }
@@ -37,6 +49,10 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
     public IStackValue multiply(IStackValue right) {
         if (right instanceof IntegerStackValue integerStackValue) {
             return new FloatingPointNumberStackValue(value * integerStackValue.value());
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return new FloatingPointNumberStackValue(value * byteValue.getLongValue());
         }
 
         if (right instanceof FloatingPointNumberStackValue floatValue) {
@@ -52,6 +68,10 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
             return new FloatingPointNumberStackValue(value / integerStackValue.value());
         }
 
+        if (right instanceof ByteStackValue byteValue) {
+            return new FloatingPointNumberStackValue(value / byteValue.getLongValue());
+        }
+
         if (right instanceof FloatingPointNumberStackValue floatValue) {
             return new FloatingPointNumberStackValue(value / floatValue.value());
         }
@@ -63,6 +83,10 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
     public IStackValue mod(IStackValue right) {
         if (right instanceof IntegerStackValue integerStackValue) {
             return new FloatingPointNumberStackValue(value % integerStackValue.value());
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return new FloatingPointNumberStackValue(value % byteValue.getLongValue());
         }
 
         if (right instanceof FloatingPointNumberStackValue floatValue) {
@@ -78,6 +102,10 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
             return Double.compare(value, floatValue.value);
         }
 
+        if (right instanceof ByteStackValue byteValue) {
+            return Double.compare(value, byteValue.getLongValue());
+        }
+
         if (right instanceof IntegerStackValue integerValue) {
             return Double.compare(value, integerValue.value());
         }
@@ -89,6 +117,10 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
     public boolean equals(IStackValue right) {
         if (right instanceof FloatingPointNumberStackValue floatValue) {
             return value == floatValue.value;
+        }
+
+        if (right instanceof ByteStackValue byteValue) {
+            return value == byteValue.value();
         }
 
         if (right instanceof IntegerStackValue integerValue) {
