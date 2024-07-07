@@ -1,0 +1,8 @@
+stdlib = import "./rps_stdlib.rps";
+
+a = 0.4; //sugar ratio: sugarRatio a
+b = 0.15; //sugar ratio in the sorbet: b
+c = 700; //the weight of sorbet in grams
+x = $c / ($a + $a / $b); //syrup needed: x
+
+("The syrup needed in the sorbet is : %s%n", [$x]) -> $stdlib.printf;

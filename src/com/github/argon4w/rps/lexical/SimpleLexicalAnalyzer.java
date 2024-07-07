@@ -3,9 +3,8 @@ package com.github.argon4w.rps.lexical;
 import com.github.argon4w.rps.lexical.tokens.*;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
-public class SimpleLexicalAnalyzer {
+public class SimpleLexicalAnalyzerWithRadix {
     public final SimpleTokenHashMap operatorTokenMap;
     public final SimpleTokenHashMap keywordTokenMap;
     private final List<IToken> tokens;
@@ -21,6 +20,9 @@ public class SimpleLexicalAnalyzer {
     public boolean multiLineCommitState;
 
     public boolean integerNumberState;
+    public boolean binIntegerNumberState;
+    public boolean octIntegerNumberState;
+    public boolean hexIntegerNumberState;
     public boolean floatingPointNumberState;
 
     public StringBuffer stringBuffer;
@@ -31,7 +33,7 @@ public class SimpleLexicalAnalyzer {
     public char[] characters;
     public int index;
 
-    public SimpleLexicalAnalyzer(SimpleTokenHashMap operatorTokenMap, SimpleTokenHashMap keywordTokenMap) {
+    public SimpleLexicalAnalyzerWithRadix(SimpleTokenHashMap operatorTokenMap, SimpleTokenHashMap keywordTokenMap) {
         this.operatorTokenMap = operatorTokenMap;
         this.keywordTokenMap = keywordTokenMap;
         this.tokens = new ArrayList<>();
@@ -49,6 +51,9 @@ public class SimpleLexicalAnalyzer {
         multiLineCommitState = false;
 
         integerNumberState = false;
+        binIntegerNumberState = false;
+        octIntegerNumberState = false;
+        hexIntegerNumberState = false;
         floatingPointNumberState = false;
 
         stringBuffer = new StringBuffer();
@@ -183,6 +188,24 @@ public class SimpleLexicalAnalyzer {
                 integerNumberState = true;
             }
 
+            if (isOctIntegerNumberStateEnter()) {
+                integerNumberState = false;
+                octIntegerNumberState = true;
+                continue;
+            }
+
+            if (isBinIntegerNumberStateEnter()) {
+                octIntegerNumberState = false;
+                binIntegerNumberState = true;
+                continue;
+            }
+
+            if (isHexIntegerNumberStateEnter()) {
+                octIntegerNumberState = false;
+                hexIntegerNumberState = true;
+                continue;
+            }
+
             if (isFloatingPointNumberStateEnter()) {
                 integerNumberState = false;
                 floatingPointNumberState = true;
@@ -193,12 +216,27 @@ public class SimpleLexicalAnalyzer {
                 flushIntegerNumber();
             }
 
+            if (isOctIntegerNumberStateExit()) {
+                octIntegerNumberState = false;
+                flushOctIntegerNumber();
+            }
+
+            if (isBinIntegerNumberStateExit()) {
+                binIntegerNumberState = false;
+                flushBinIntegerNumber();
+            }
+
+            if (isHexIntegerNumberStateExit()) {
+                hexIntegerNumberState = false;
+                flushHexIntegerNumber();
+            }
+
             if (isFloatingPointNumberStateExit()) {
                 floatingPointNumberState = false;
                 flushFloatingPointNumber();
             }
 
-            if (integerNumberState || floatingPointNumberState) {
+            if (integerNumberState || floatingPointNumberState || octIntegerNumberState || binIntegerNumberState || hexIntegerNumberState) {
                 numberBuffer.append(characters[index]);
                 continue;
             }
@@ -222,6 +260,18 @@ public class SimpleLexicalAnalyzer {
             flushIntegerNumber();
         }
 
+        if (binIntegerNumberState) {
+            flushBinIntegerNumber();
+        }
+
+        if (octIntegerNumberState) {
+            flushOctIntegerNumber();
+        }
+
+        if (hexIntegerNumberState) {
+            flushHexIntegerNumber();
+        }
+
         if (floatingPointNumberState) {
             flushFloatingPointNumber();
         }
@@ -236,6 +286,9 @@ public class SimpleLexicalAnalyzer {
         numberBuffer = new StringBuffer();
 
         integerNumberState = false;
+        octIntegerNumberState = false;
+        binIntegerNumberState = false;
+        hexIntegerNumberState = false;
         floatingPointNumberState = false;
     }
 
@@ -283,12 +336,39 @@ public class SimpleLexicalAnalyzer {
         numberBuffer = new StringBuffer();
     }
 
+    public void flushBinIntegerNumber() {
+        tokens.add(getNumberBufferAsBinIntegerNumber());
+        numberBuffer = new StringBuffer();
+    }
+
+    public void flushOctIntegerNumber() {
+        tokens.add(getNumberBufferAsOctIntegerNumber());
+        numberBuffer = new StringBuffer();
+    }
+
+    public void flushHexIntegerNumber() {
+        tokens.add(getNumberBufferAsHexIntegerNumber());
+        numberBuffer = new StringBuffer();
+    }
+
     public IToken getNumberBufferAsFloatingPointNumber() {
         return new FloatingPointNumberToken(Double.parseDouble(numberBuffer.toString()));
     }
 
     public IToken getNumberBufferAsIntegerNumber() {
         return new IntegerNumberToken(Long.parseLong(numberBuffer.toString()));
+    }
+
+    public IToken getNumberBufferAsBinIntegerNumber() {
+        return new IntegerNumberToken(Long.parseLong(numberBuffer.toString(), 2));
+    }
+
+    public IToken getNumberBufferAsOctIntegerNumber() {
+        return numberBuffer.isEmpty() ? new IntegerNumberToken(0) : new IntegerNumberToken(Long.parseLong(numberBuffer.toString(), 8));
+    }
+
+    public IToken getNumberBufferAsHexIntegerNumber() {
+        return new IntegerNumberToken(Long.parseLong(numberBuffer.toString(), 16));
     }
 
     public void flushDoubleQuotedString() {
@@ -321,15 +401,39 @@ public class SimpleLexicalAnalyzer {
     }
 
     public boolean isNumberStateEnter() {
-        return !integerNumberState && !floatingPointNumberState && isDecCharacter(characters[index]) && tokenBuffer.isEmpty();
+        return !integerNumberState && !floatingPointNumberState && !binIntegerNumberState && !octIntegerNumberState && !hexIntegerNumberState && isDecCharacter(characters[index]) && tokenBuffer.isEmpty();
     }
 
     public boolean isFloatingPointNumberStateEnter() {
         return integerNumberState && isFloatingPointNumberCharacter(characters[index]) && !isRangeOperatorException();
     }
 
+    public boolean isOctIntegerNumberStateEnter() {
+        return integerNumberState && numberBuffer.isEmpty() && hasMore(2) && characters[index] == '0' && !isFloatingPointNumberCharacter(characters[index + 1]);
+    }
+
+    public boolean isBinIntegerNumberStateEnter() {
+        return octIntegerNumberState && numberBuffer.isEmpty() && characters[index] == 'b';
+    }
+
+    public boolean isHexIntegerNumberStateEnter() {
+        return octIntegerNumberState && numberBuffer.isEmpty() && characters[index] == 'x';
+    }
+
     public boolean isIntegerNumberStateExit() {
         return integerNumberState && (!isDecCharacter(characters[index]) || isRangeOperatorException());
+    }
+
+    public boolean isOctIntegerNumberStateExit() {
+        return octIntegerNumberState && (!isOctCharacter(characters[index]) || isRangeOperatorException());
+    }
+
+    public boolean isBinIntegerNumberStateExit() {
+        return binIntegerNumberState && (!isBinCharacter(characters[index]) || isRangeOperatorException());
+    }
+
+    public boolean isHexIntegerNumberStateExit() {
+        return hexIntegerNumberState && (!isHexCharacter(characters[index]) || isRangeOperatorException());
     }
 
     public boolean isFloatingPointNumberStateExit() {
@@ -337,7 +441,7 @@ public class SimpleLexicalAnalyzer {
     }
 
     public boolean isRangeOperatorException() {
-        return index < characters.length - 1 && characters[index] == '.' && characters[index + 1] == '.';
+        return hasMore(2) && characters[index] == '.' && characters[index + 1] == '.';
     }
 
     public boolean isFloatingPointNumberCharacter(char c) {
@@ -406,6 +510,10 @@ public class SimpleLexicalAnalyzer {
 
     public boolean isOctCharacter(char c) {
         return c >= '0' && c <= '7';
+    }
+
+    public boolean isBinCharacter(char c) {
+        return c == '0' || c == '1';
     }
 
     public boolean isDecCharacter(char c) {
