@@ -119,6 +119,7 @@ public class RePolishRuntime {
         keywordMap.put("import", ImportOperatorToken::new);
         keywordMap.put("as", AsOperatorToken::new);
         keywordMap.put("is", IsOperatorToken::new);
+        keywordMap.put("has", HasOperatorToken::new);
 
         keywordMap.put("boolean", BooleanTypeToken::new);
         keywordMap.put("byte", ByteTypeToken::new);

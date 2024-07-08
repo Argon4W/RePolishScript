@@ -15,4 +15,4 @@ b = (10) -> $fib; //55
 c = 8 in $fibCache; //21
 d = 9 in $fibCache; //34
 
-$b -> $stdlib.println;
+$b -> $stdlib.writeLine;

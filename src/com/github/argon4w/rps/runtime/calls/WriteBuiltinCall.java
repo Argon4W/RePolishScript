@@ -1,7 +1,9 @@
 package com.github.argon4w.rps.runtime.calls;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
+import com.github.argon4w.rps.runtime.values.IListStackValue;
 import com.github.argon4w.rps.runtime.values.IStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.ByteStackValue;
 import com.github.argon4w.rps.runtime.values.primitive.IPrimitiveStackValue;
 
 public class WriteBuiltinCall implements IBuiltinCall {
@@ -9,10 +11,10 @@ public class WriteBuiltinCall implements IBuiltinCall {
     public void invoke(RuntimeStack stack) {
         IStackValue value = stack.pop();
 
-        if (!(value instanceof IPrimitiveStackValue primitiveRight)) {
+        if (!(value instanceof ByteStackValue byteValue)) {
             throw new IllegalStateException("Illegal right components");
         }
 
-        System.out.print(primitiveRight.getStringValue());
+        System.out.write(byteValue.value());
     }
 }

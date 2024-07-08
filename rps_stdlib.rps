@@ -1,19 +1,62 @@
-printf = (value) -> {
-    push $value;
-    call "write";
+read = () -> {
+    return () -> $readIterator -> $iteratorToCharacter;
 };
 
-println = (value) -> {
-    push $value + "\n";
-    call "write";
+readLine = () -> {
+    result = "";
+
+    isEndOfLine = (characterValue) -> {
+        return $characterValue != 0 && (
+            $characterValue == "\r" ||
+            $characterValue == "\n" ||
+            $characterValue == "\u2028" ||
+            $characterValue == "\u2029" ||
+            $characterValue == "\u0085"
+        );
+    };
+
+    characterValue = () -> $read;
+
+    while (!$characterValue -> $isEndOfLine) {
+        $result += $characterValue;
+        $characterValue = () -> $read;
+    };
+
+    return $result;
 };
 
-printf = (value, fmt) -> {
-    push ($value, $fmt) -> $sprintf;
-    call "write";
+readIterator = () -> {
+    return {
+        hasNext = () -> {
+            return true;
+        };
+
+        next = () -> {
+            return (call "read");
+        };
+    };
 };
 
-sprintf = (value, fmt) -> {
+write = (value) -> {
+    $value as string -> $stringToBytes -> $writeBytes;
+};
+
+writeBytes = (byteList) -> {
+    for (byteValue in $byteList) {
+        push $byteValue;
+        call "write";
+    };
+};
+
+writeLine = (value) -> {
+    ($value + "\n") -> $stringToBytes -> $writeBytes;
+};
+
+writeFormat = (value, fmt) -> {
+    ($value, $fmt) -> $formatString -> $stringToBytes -> $writeBytes;
+};
+
+formatString = (value, fmt) -> {
     index = 0;
     result = "";
     state = false;
@@ -51,8 +94,153 @@ sprintf = (value, fmt) -> {
     return $result;
 };
 
-read = () -> {
-    return (call "read");
+byteToInteger = (byteValue) -> {
+    return $byteValue as integer & 0xFF;
+};
+
+stringToBytes = (stringValue) -> {
+    return $stringValue -> $listToIterator -> $iteratorToBytes;
+};
+
+iteratorToBytes = (iterator) -> {
+    "222"
+    result = [];
+
+    while (() -> $iterator.hasNext) {
+        $result += () -> $iterator.next -> $characterToBytes;
+    };
+
+    return $result;
+};
+
+bytesToString = (byteList) -> {
+    return $byteList -> $listToIterator -> $iteratorToString;
+};
+
+iteratorToString = (iterator) -> {
+    result = "";
+
+    while (() -> $iterator.hasNext) {
+        $result += ($iterator) -> $iteratorToCharacter;
+    };
+
+    return $result;
+};
+
+characterToBytes = (characterValue) -> {
+    result = [];
+    integerValue = $characterValue as integer;
+
+    if ($integerValue <= 0x7F) {
+        $result += $integerValue as byte;
+        return $result;
+    };
+
+    if ($integerValue <= 0x7FF) {
+        firstByte = ((($integerValue >>> 6) & 0b11111) | 0b11000000) as byte;
+        secondByte = (($integerValue & 0b111111) | 0b10000000) as byte;
+
+        $result += $firstByte;
+        $result += $secondByte;
+        return $result;
+    };
+
+    if ($integerValue <= 0xFFFF) {
+        firstByte = ((($integerValue >>> 12) & 0b1111) | 0b11100000) as byte;
+        secondByte = ((($integerValue >>> 6) & 0b111111) | 0b10000000) as byte;
+        thirdByte = (($integerValue & 0b111111) | 0b10000000) as byte;
+
+        $result += $firstByte;
+        $result += $secondByte;
+        $result += $thirdByte;
+        return $result;
+    };
+
+    if ($integerValue <= 0x10FFFF) {
+        firstByte = ((($integerValue >>> 18) & 0b111) | 0b11110000) as byte;
+        secondByte = ((($integerValue >>> 12) & 0b111111) | 0b10000000) as byte;
+        thirdByte = ((($integerValue >>> 6) & 0b111111) | 0b10000000) as byte;
+        fourthByte = (($integerValue & 0b111111) | 0b10000000) as byte;
+
+        $result += $firstByte;
+        $result += $secondByte;
+        $result += $thirdByte;
+        $result += $fourthByte;
+        return $result;
+    };
+};
+
+iteratorToCharacter = (iterator) -> {
+    firstByte = () -> $iterator.next -> $byteToInteger;
+
+    if ($firstByte >>> 7 == 0) {
+        return $firstByte as character;
+    };
+
+    if ($firstByte >>> 5 == 0b110) {
+        secondByte = () -> $iterator.next -> $byteToInteger & 0b00111111;
+        $firstByte &= 0b00011111;
+        codepoint = ($firstByte << 6) | $secondByte;
+
+        return $codepoint as character;
+    };
+
+    if ($firstByte >>> 4 == 0b1110) {
+        secondByte = () -> $iterator.next -> $byteToInteger & 0b00111111;
+        thirdByte = () -> $iterator.next -> $byteToInteger & 0b00111111;
+        $firstByte &= 0b00001111;
+        codepoint = ($firstByte << 12) | ($secondByte << 6) | $thirdByte;
+
+        return $codepoint as character;
+    };
+
+    if ($firstByte >>> 3 == 0b11110) {
+        secondByte = () -> $iterator.next -> $byteToInteger & 0b00111111;
+        thirdByte = () -> $iterator.next -> $byteToInteger & 0b00111111;
+        fourthByte = () -> $iterator.next -> $byteToInteger & 0b00111111;
+        $firstByte &= 0b00000111;
+        codepoint = ($firstByte << 18) | ($secondByte << 12) | ($thirdByte << 6) | $fourthByte;
+
+        return $codepoint as character;
+    };
+
+    return null;
+};
+
+listToIterator = (listValue) -> {
+    return {
+        listCache = $listValue;
+        cursor = 0;
+
+        next = () -> {
+            if (!() -> $hasNext) {
+                return null;
+            };
+
+            result = $cursor in $listCache;
+            $cursor += 1;
+
+            return $result;
+        };
+
+        hasNext = () -> {
+            return $cursor != len $listCache;
+        };
+    };
+};
+
+iteratorToList = (iterator) -> {
+    if ($iterator has "listCache") {
+        return $iterator.listCache;
+    };
+
+    listValue = [];
+
+    while (() -> $iterator.hasNext) {
+        $listValue += () -> $iterator.next;
+    };
+
+    return $listValue;
 };
 
 listToString = (listValue) -> {

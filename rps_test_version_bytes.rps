@@ -1,0 +1,7 @@
+stdlib = import "./rps_stdlib.rps";
+
+"这是一个测试" -> $stdlib.stringToBytes -> $stdlib.bytesToString -> $stdlib.writeLine;
+"这是一个测试" -> $stdlib.stringToBytes -> $stdlib.listToString -> $stdlib.writeLine;
+"这是一个测试" -> $stdlib.stringToBytes -> $stdlib.listToIterator -> $stdlib.iteratorToList -> $stdlib.listToString -> $stdlib.writeLine;
+str = () -> $stdlib.readLine;
+$str -> $stdlib.writeLine;

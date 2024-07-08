@@ -9,10 +9,7 @@ import com.github.argon4w.rps.runtime.values.loop.LoopListStackValue;
 import com.github.argon4w.rps.runtime.values.loop.LoopRangeStackValue;
 import com.github.argon4w.rps.runtime.values.loop.LoopStackStackValue;
 import com.github.argon4w.rps.runtime.values.paralleled.ParalleledStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.ByteStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IRangeStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IStringStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IntegerStackValue;
+import com.github.argon4w.rps.runtime.values.primitive.*;
 
 public class InInstruction implements IInstruction {
     @Override

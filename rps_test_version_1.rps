@@ -1,8 +1,8 @@
 stdlib = import "./rps_stdlib.rps";
 
-("Hello %s %s %s%n", ["RePolish", "Script", 1024]) -> $stdlib.printf;
+("Hello %s %s %s%n", ["RePolish", "Script", 1024]) -> $stdlib.writeFormat;
 
-input = () -> $stdlib.read;
+input = () -> $stdlib.readLine;
 
 result = if ($input == "hello") {
     return "Input is hello";
@@ -10,4 +10,4 @@ result = if ($input == "hello") {
     return "Input is not hello";
 };
 
-$result -> $stdlib.println;
+$result -> $stdlib.writeLine;
