@@ -74,7 +74,7 @@ public class SingleQuotedStringStackValue implements IStringStackValue {
             return new SingleQuotedStringStackValue(codePoints, primitiveRight.getStringValue());
         }
 
-        throw new IllegalStateException("Illegal right components: " + right.getClass().getSimpleName());
+        throw new IllegalStateException("Illegal right components");
     }
 
     @Override

@@ -26,12 +26,12 @@ public class ListStackValue implements IAddableStackValue, IMultiplierStackValue
         this(values);
 
         if (appendValue instanceof ListStackValue listValue) {
-            this.values.addAll(List.copyOf(listValue.values()));
+            this.values.addAll(listValue.values());
             return;
         }
 
         if (appendValue instanceof ListSliceStackValue sliceValue) {
-            this.values.addAll(List.copyOf(sliceValue.values()));
+            this.values.addAll(sliceValue.values());
             return;
         }
 

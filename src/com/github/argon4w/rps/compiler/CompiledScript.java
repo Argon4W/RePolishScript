@@ -1,6 +1,8 @@
 package com.github.argon4w.rps.compiler;
 
-public record CompiledScript(CompiledStack[] compiledStacks, int rootStack) {
+import java.io.Serializable;
+
+public record CompiledScript(CompiledStack[] compiledStacks, int rootStack) implements Serializable {
     public CompiledStack getRootStack() {
         return compiledStacks[rootStack];
     }

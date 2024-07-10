@@ -46,7 +46,8 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
     }
 
     public IStackValue getVariableInternal(String key) {
-        return variableStorage.containsKey(key) ? new VariableStackValue(this, key, variableStorage.get(key)) : getVariableFromParent(key);
+        boolean contains = variableStorage.containsKey(key);
+        return contains ? new VariableStackValue(this, key, variableStorage.get(key)) : getVariableFromParent(key);
     }
 
     public IStackValue getVariableFromParent(String key) {
