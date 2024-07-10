@@ -2,10 +2,10 @@ package com.github.argon4w.rps.runtime.valuess.slice;
 
 import com.github.argon4w.rps.runtime.valuess.IListStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
 import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.IAddableStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.IRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.SimpleRangeStackValue;
 
 import java.util.List;

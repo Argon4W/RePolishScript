@@ -2,14 +2,16 @@ package com.github.argon4w.rps.runtime;
 
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.EmptyStackValue;
-import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
+import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
 import com.github.argon4w.rps.runtime.valuess.referenced.VariableStackValue;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
     public final RuntimeCalls runtimeCalls;
@@ -46,8 +48,7 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
     }
 
     public IStackValue getVariableInternal(String key) {
-        boolean contains = variableStorage.containsKey(key);
-        return contains ? new VariableStackValue(this, key, variableStorage.get(key)) : getVariableFromParent(key);
+        return variableStorage.containsKey(key) ? new VariableStackValue(this, key, variableStorage.get(key)) : getVariableFromParent(key);
     }
 
     public IStackValue getVariableFromParent(String key) {

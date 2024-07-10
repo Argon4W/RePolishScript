@@ -7,7 +7,6 @@ import com.github.argon4w.rps.runtime.valuess.referenced.ListElementStackValue;
 import com.github.argon4w.rps.runtime.valuess.slice.ListSliceStackValue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 

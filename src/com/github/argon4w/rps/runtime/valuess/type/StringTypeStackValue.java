@@ -2,7 +2,9 @@ package com.github.argon4w.rps.runtime.valuess.type;
 
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ITypeStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.*;
+import com.github.argon4w.rps.runtime.valuess.primitive.IPrimitiveStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IStringStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.SingleQuotedStringStackValue;
 
 public class StringTypeStackValue implements ITypeStackValue {
     @Override

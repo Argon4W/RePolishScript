@@ -3,7 +3,6 @@ package com.github.argon4w.rps.syntactic.nodes.stack;
 import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.operands.PushIntegerNumberInstruction;
-import com.github.argon4w.rps.runtime.instrutions.stack.PushStackInstruction;
 import com.github.argon4w.rps.runtime.instrutions.stack.PushWrapperStackInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
 import com.github.argon4w.rps.syntactic.nodes.operands.AbstractOperandSyntaxTreeNode;

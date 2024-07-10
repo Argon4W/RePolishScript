@@ -4,9 +4,9 @@ import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.valuess.IListStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ITypeStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.IRangeStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.IntegerStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.SingleQuotedStringStackValue;
 
 public class ListTypeStackValue implements ITypeStackValue {

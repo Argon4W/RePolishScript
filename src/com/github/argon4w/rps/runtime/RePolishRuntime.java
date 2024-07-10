@@ -6,7 +6,6 @@ import com.github.argon4w.rps.runtime.calls.ReadRuntimeCall;
 import com.github.argon4w.rps.runtime.calls.WriteRuntimeCall;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 

@@ -3,9 +3,9 @@ package com.github.argon4w.rps.runtime.instrutions.condition;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.RuntimeWrapperStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.valuess.primitive.ConditionFailedStackValue;
 import com.github.argon4w.rps.runtime.valuess.IEndStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.ConditionFailedStackValue;
 
 public class ElseInstruction implements IInstruction {
     @Override

@@ -6,8 +6,6 @@ import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
-import java.util.List;
-
 public class RuntimeRootStack extends RuntimeStack {
     public RuntimeRootStack(IInstruction[] instructions, RuntimeCalls runtimeCalls, RePolishRuntime runtime) {
         super(instructions, runtimeCalls, runtime);

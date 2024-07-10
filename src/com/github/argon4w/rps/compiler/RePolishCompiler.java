@@ -27,16 +27,10 @@ import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
 import com.github.argon4w.rps.syntactic.ReversePolishSyntacticTreeBuilder;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 

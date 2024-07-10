@@ -5,11 +5,14 @@ import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.IListStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.NameStackValue;
+import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 import com.github.argon4w.rps.runtime.valuess.loop.LoopListStackValue;
 import com.github.argon4w.rps.runtime.valuess.loop.LoopRangeStackValue;
 import com.github.argon4w.rps.runtime.valuess.loop.LoopStackStackValue;
-import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.*;
+import com.github.argon4w.rps.runtime.valuess.primitive.ByteStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IStringStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IntegerStackValue;
 
 public class InInstruction implements IInstruction {
     @Override

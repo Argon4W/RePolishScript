@@ -2,9 +2,7 @@ package com.github.argon4w.rps.runtime;
 
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
-import java.util.List;
 import java.util.Map;
 
 public class RuntimeWrapperStack extends RuntimeStack {

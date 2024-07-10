@@ -4,9 +4,7 @@ import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 import com.github.argon4w.rps.runtime.valuess.ParameterStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
-import java.util.List;
 import java.util.Map;
 
 public class RuntimeExpressionStack extends RuntimeStack {
