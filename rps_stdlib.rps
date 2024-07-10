@@ -42,10 +42,8 @@ write = (value) -> {
 };
 
 writeBytes = (byteList) -> {
-    for (byteValue in $byteList) {
-        push $byteValue;
-        call "write";
-    };
+    push $byteList;
+    call "writeList";
 };
 
 writeLine = (value) -> {

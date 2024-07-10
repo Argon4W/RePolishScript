@@ -5,15 +5,21 @@ import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.ByteStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
 
-public class WriteRuntimeCall implements IRuntimeCall {
+public class WriteListRuntimeCall implements IRuntimeCall {
     @Override
     public void invoke(RuntimeStack stack) {
         IStackValue value = stack.pop();
 
-        if (!(value instanceof ByteStackValue byteValue)) {
+        if (!(value instanceof ListStackValue listValue)) {
             throw new IllegalStateException("Illegal right components");
         }
 
-        System.out.write(byteValue.value());
+        for (IStackValue elementValue : listValue.values()) {
+            if (!(elementValue instanceof ByteStackValue byteValue)) {
+                throw new IllegalStateException("Illegal list element");
+            }
+
+            System.out.write(byteValue.value());
+        }
     }
 }
