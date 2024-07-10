@@ -1,5 +1,6 @@
 package com.github.argon4w.rps.syntactic.nodes.operands.type;
 
+import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.operands.type.AbstractPushTypeInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
@@ -16,7 +17,7 @@ public abstract class AbstractPushTypeSyntaxTreeNode implements ISyntaxTreeNode 
     }
 
     @Override
-    public List<IInstruction> getInstructions() {
+    public List<IInstruction> compile(RePolishCompiler compiler) {
         return List.of(getTypeInstruction());
     }
 }

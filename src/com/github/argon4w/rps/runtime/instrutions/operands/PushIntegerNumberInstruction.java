@@ -2,7 +2,7 @@ package com.github.argon4w.rps.runtime.instrutions.operands;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.primitive.IntegerStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IntegerStackValue;
 
 public record PushIntegerNumberInstruction(long value) implements IInstruction {
     @Override

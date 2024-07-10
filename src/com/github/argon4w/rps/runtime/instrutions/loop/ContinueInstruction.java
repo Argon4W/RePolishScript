@@ -2,7 +2,7 @@ package com.github.argon4w.rps.runtime.instrutions.loop;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.loop.ContinueStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.ContinueStackValue;
 
 public class ContinueInstruction implements IInstruction {
     @Override

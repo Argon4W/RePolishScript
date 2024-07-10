@@ -2,8 +2,8 @@ package com.github.argon4w.rps.runtime.instrutions.object;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.ReturnStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.UndefinedStackValue;
+import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
 public class ReturnInstruction implements IInstruction {
     @Override

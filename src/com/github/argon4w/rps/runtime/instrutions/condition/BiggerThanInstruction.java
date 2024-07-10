@@ -2,9 +2,9 @@ package com.github.argon4w.rps.runtime.instrutions.condition;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.BooleanStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IComparableStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IComparableStackValue;
 
 public class BiggerThanInstruction implements IInstruction {
     @Override

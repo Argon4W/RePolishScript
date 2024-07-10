@@ -2,8 +2,8 @@ package com.github.argon4w.rps.runtime.instrutions.bit;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IBitOperandStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IBitOperandStackValue;
 
 public class BitLeftShiftInstruction implements IInstruction {
     @Override

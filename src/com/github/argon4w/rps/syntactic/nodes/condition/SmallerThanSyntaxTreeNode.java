@@ -1,5 +1,6 @@
 package com.github.argon4w.rps.syntactic.nodes.condition;
 
+import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.condition.SmallerThanInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
@@ -19,11 +20,11 @@ public class SmallerThanSyntaxTreeNode implements ISyntaxTreeNode {
     }
 
     @Override
-    public List<IInstruction> getInstructions() {
+    public List<IInstruction> compile(RePolishCompiler compiler) {
         List<IInstruction> instructions = new ArrayList<>();
 
-        instructions.addAll(left.getInstructions());
-        instructions.addAll(right.getInstructions());
+        instructions.addAll(left.compile(compiler));
+        instructions.addAll(right.compile(compiler));
         instructions.add(new SmallerThanInstruction());
 
         return instructions;

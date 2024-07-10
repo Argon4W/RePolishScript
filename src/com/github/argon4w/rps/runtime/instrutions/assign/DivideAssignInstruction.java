@@ -2,9 +2,9 @@ package com.github.argon4w.rps.runtime.instrutions.assign;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IReferencedStackValue;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.INumericStackValue;
+import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.INumericStackValue;
 
 public class DivideAssignInstruction implements IInstruction {
     @Override

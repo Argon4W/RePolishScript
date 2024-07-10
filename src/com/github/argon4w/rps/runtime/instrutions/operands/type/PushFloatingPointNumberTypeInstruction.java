@@ -1,8 +1,7 @@
 package com.github.argon4w.rps.runtime.instrutions.operands.type;
 
-import com.github.argon4w.rps.runtime.values.ITypeStackValue;
-import com.github.argon4w.rps.runtime.values.type.ByteTypeStackValue;
-import com.github.argon4w.rps.runtime.values.type.FloatingPointNumberTypeStackValue;
+import com.github.argon4w.rps.runtime.valuess.ITypeStackValue;
+import com.github.argon4w.rps.runtime.valuess.type.FloatingPointNumberTypeStackValue;
 
 public class PushFloatingPointNumberTypeInstruction extends AbstractPushTypeInstruction {
     @Override

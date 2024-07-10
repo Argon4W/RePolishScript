@@ -2,8 +2,9 @@ package com.github.argon4w.rps.runtime.instrutions.math;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.INumericStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IMultiplierStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.INumericStackValue;
 
 public class MultiplyInstruction implements IInstruction {
     @Override
@@ -11,11 +12,11 @@ public class MultiplyInstruction implements IInstruction {
         IStackValue right = stack.pop();
         IStackValue left = stack.pop();
 
-        if (!(left instanceof INumericStackValue numericLeft)) {
+        if (!(left instanceof IMultiplierStackValue multiplierLef)) {
             throw new IllegalStateException("Illegal left components");
         }
 
-        stack.push(numericLeft.multiply(right));
+        stack.push(multiplierLef.multiply(right));
         return false;
     }
 }

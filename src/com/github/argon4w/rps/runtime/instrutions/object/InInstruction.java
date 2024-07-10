@@ -2,14 +2,14 @@ package com.github.argon4w.rps.runtime.instrutions.object;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IListStackValue;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.NameStackValue;
-import com.github.argon4w.rps.runtime.values.loop.LoopListStackValue;
-import com.github.argon4w.rps.runtime.values.loop.LoopRangeStackValue;
-import com.github.argon4w.rps.runtime.values.loop.LoopStackStackValue;
-import com.github.argon4w.rps.runtime.values.paralleled.ParalleledStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.*;
+import com.github.argon4w.rps.runtime.valuess.IListStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.NameStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.LoopListStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.LoopRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.LoopStackStackValue;
+import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.*;
 
 public class InInstruction implements IInstruction {
     @Override

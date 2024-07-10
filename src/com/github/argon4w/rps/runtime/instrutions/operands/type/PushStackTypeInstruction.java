@@ -1,8 +1,7 @@
 package com.github.argon4w.rps.runtime.instrutions.operands.type;
 
-import com.github.argon4w.rps.runtime.values.ITypeStackValue;
-import com.github.argon4w.rps.runtime.values.type.StackTypeStackValue;
-import com.github.argon4w.rps.runtime.values.type.StringTypeStackValue;
+import com.github.argon4w.rps.runtime.valuess.ITypeStackValue;
+import com.github.argon4w.rps.runtime.valuess.type.StackTypeStackValue;
 
 public class PushStackTypeInstruction extends AbstractPushTypeInstruction {
     @Override

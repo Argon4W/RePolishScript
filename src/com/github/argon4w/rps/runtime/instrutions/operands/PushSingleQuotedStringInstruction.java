@@ -2,7 +2,7 @@ package com.github.argon4w.rps.runtime.instrutions.operands;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.primitive.SingleQuotedStringStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.SingleQuotedStringStackValue;
 
 public record PushSingleQuotedStringInstruction(String value) implements IInstruction {
     @Override

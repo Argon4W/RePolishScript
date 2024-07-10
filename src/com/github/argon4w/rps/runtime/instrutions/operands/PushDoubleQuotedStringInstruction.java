@@ -2,7 +2,7 @@ package com.github.argon4w.rps.runtime.instrutions.operands;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.primitive.DoubleQuotedStringStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.DoubleQuotedStringStackValue;
 
 public record PushDoubleQuotedStringInstruction(String value) implements IInstruction {
     @Override

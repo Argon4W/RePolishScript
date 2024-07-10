@@ -1,16 +1,15 @@
 package com.github.argon4w.rps.runtime;
 
-import com.github.argon4w.rps.RePolishRuntime;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.UndefinedStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
 import java.util.List;
 import java.util.Map;
 
 public class RuntimeWrapperStack extends RuntimeStack {
-    public RuntimeWrapperStack(List<IInstruction> instructions, RuntimeStack parentStack, RuntimeBuiltinFunctions runtimeBuiltinFunctions, RePolishRuntime runtime) {
-        super(instructions, parentStack, runtimeBuiltinFunctions, runtime);
+    public RuntimeWrapperStack(IInstruction[] instructions, RuntimeCalls runtimeCalls, RePolishRuntime runtime) {
+        super(instructions, runtimeCalls, runtime);
     }
 
     @Override
@@ -25,6 +24,6 @@ public class RuntimeWrapperStack extends RuntimeStack {
 
     @Override
     public IStackValue getVariableFromParent(String key) {
-        return parentStack.parentStack == null ? new UndefinedStackValue() : parentStack.parentStack.getVariableInternal(key);
+        return parentStack.getVariableFromParent(key);
     }
 }

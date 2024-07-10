@@ -1,8 +1,8 @@
 package com.github.argon4w.rps.syntactic.nodes;
 
+import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.AsInstruction;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.instrutions.ParalleledInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
 
 import java.util.ArrayList;
@@ -20,11 +20,11 @@ public class AsSyntaxTreeNode implements ISyntaxTreeNode {
     }
 
     @Override
-    public List<IInstruction> getInstructions() {
+    public List<IInstruction> compile(RePolishCompiler compiler) {
         List<IInstruction> instructions = new ArrayList<>();
 
-        instructions.addAll(left.getInstructions());
-        instructions.addAll(right.getInstructions());
+        instructions.addAll(left.compile(compiler));
+        instructions.addAll(right.compile(compiler));
         instructions.add(new AsInstruction());
 
         return instructions;

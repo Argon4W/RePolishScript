@@ -1,5 +1,6 @@
 package com.github.argon4w.rps.syntactic.nodes.operands;
 
+import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.operands.PushFloatingPointNumberInstruction;
 
@@ -13,7 +14,7 @@ public class PushFloatingNumberSyntaxTreeNode extends AbstractOperandSyntaxTreeN
     }
 
     @Override
-    public List<IInstruction> getInstructions() {
+    public List<IInstruction> compile(RePolishCompiler compiler) {
         return List.of(new PushFloatingPointNumberInstruction(value));
     }
 }

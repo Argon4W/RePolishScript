@@ -1,17 +1,16 @@
 package com.github.argon4w.rps.runtime;
 
-import com.github.argon4w.rps.RePolishRuntime;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.EmptyStackValue;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.paralleled.ListStackValue;
-import com.github.argon4w.rps.runtime.values.paralleled.ParalleledStackValue;
+import com.github.argon4w.rps.runtime.valuess.EmptyStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
+import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 
 import java.util.List;
 
 public class RuntimeArrayStack extends RuntimeExpressionStack {
-    public RuntimeArrayStack(List<IInstruction> instructions, RuntimeStack parentStack, RuntimeBuiltinFunctions runtimeBuiltinFunctions, RePolishRuntime runtime) {
-        super(instructions, parentStack, runtimeBuiltinFunctions, runtime);
+    public RuntimeArrayStack(IInstruction[] instructions, RuntimeCalls runtimeCalls, RePolishRuntime runtime) {
+        super(instructions, runtimeCalls, runtime);
     }
 
     @Override

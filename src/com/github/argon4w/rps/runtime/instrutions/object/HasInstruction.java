@@ -3,9 +3,9 @@ package com.github.argon4w.rps.runtime.instrutions.object;
 import com.github.argon4w.rps.runtime.RuntimeExpressionStack;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.BooleanStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.IStringStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.IStringStackValue;
 
 public class HasInstruction implements IInstruction {
     @Override

@@ -3,11 +3,11 @@ package com.github.argon4w.rps.runtime.instrutions.loop;
 import com.github.argon4w.rps.runtime.RuntimeExpressionStack;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.ILoopStackValue;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.NameStackValue;
-import com.github.argon4w.rps.runtime.values.ReturnStackValue;
-import com.github.argon4w.rps.runtime.values.loop.BreakStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.ILoopStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.NameStackValue;
+import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.BreakStackValue;
 
 import java.util.List;
 

@@ -1,16 +1,21 @@
 package com.github.argon4w.rps.runtime;
 
-import com.github.argon4w.rps.RePolishRuntime;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IEndStackValue;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.ReturnStackValue;
+import com.github.argon4w.rps.runtime.valuess.IEndStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
 import java.util.List;
 
 public class RuntimeRootStack extends RuntimeStack {
-    public RuntimeRootStack(List<IInstruction> instructions, RuntimeBuiltinFunctions runtimeBuiltinFunctions, RePolishRuntime runtime) {
-        super(instructions, runtimeBuiltinFunctions, runtime);
+    public RuntimeRootStack(IInstruction[] instructions, RuntimeCalls runtimeCalls, RePolishRuntime runtime) {
+        super(instructions, runtimeCalls, runtime);
+    }
+
+    @Override
+    public IStackValue getVariableFromParent(String key) {
+        return new UndefinedStackValue();
     }
 
     @Override

@@ -4,9 +4,9 @@ import com.github.argon4w.rps.runtime.RuntimeExpressionStack;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.RuntimeWrapperStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.ReturnStackValue;
-import com.github.argon4w.rps.runtime.values.loop.BreakStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
+import com.github.argon4w.rps.runtime.valuess.loop.BreakStackValue;
 
 public class WhileInstruction implements IInstruction {
     @Override

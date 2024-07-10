@@ -1,5 +1,6 @@
 package com.github.argon4w.rps.syntactic.nodes.bit;
 
+import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.bit.BitNotInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
@@ -17,10 +18,10 @@ public class BitNotSyntaxTreeNode implements ISyntaxTreeNode {
     }
 
     @Override
-    public List<IInstruction> getInstructions() {
+    public List<IInstruction> compile(RePolishCompiler compiler) {
         List<IInstruction> instructions = new ArrayList<>();
 
-        instructions.addAll(right.getInstructions());
+        instructions.addAll(right.compile(compiler));
         instructions.add(new BitNotInstruction());
 
         return instructions;

@@ -1,9 +1,9 @@
 package com.github.argon4w.rps.runtime.instrutions;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.ITypeStackValue;
-import com.github.argon4w.rps.runtime.values.primitive.BooleanStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.ITypeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
 
 public class IsInstruction implements IInstruction {
     @Override

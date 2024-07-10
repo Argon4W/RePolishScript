@@ -3,10 +3,10 @@ package com.github.argon4w.rps.runtime.instrutions.object;
 import com.github.argon4w.rps.runtime.RuntimeExpressionStack;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.values.EmptyStackValue;
-import com.github.argon4w.rps.runtime.values.FunctionStackValue;
-import com.github.argon4w.rps.runtime.values.IReferencedStackValue;
-import com.github.argon4w.rps.runtime.values.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.EmptyStackValue;
+import com.github.argon4w.rps.runtime.valuess.FunctionStackValue;
+import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
 
 public class FunctionInstruction implements IInstruction {
     @Override

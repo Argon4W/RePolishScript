@@ -1,9 +1,9 @@
 package com.github.argon4w.rps.runtime.instrutions;
 
 import com.github.argon4w.rps.runtime.RuntimeStack;
-import com.github.argon4w.rps.runtime.values.IStackValue;
-import com.github.argon4w.rps.runtime.values.paralleled.ListStackValue;
-import com.github.argon4w.rps.runtime.values.paralleled.ParalleledStackValue;
+import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
+import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 
 import java.util.List;
 

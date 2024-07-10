@@ -1,5 +1,6 @@
 package com.github.argon4w.rps.syntactic.nodes;
 
+import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
 
@@ -13,7 +14,7 @@ public class DelimiterSyntaxTreeNode implements ISyntaxTreeNode {
     }
 
     @Override
-    public List<IInstruction> getInstructions() {
+    public List<IInstruction> compile(RePolishCompiler compiler) {
         return List.of();
     }
 }
