@@ -5,6 +5,7 @@ import com.github.argon4w.rps.lexical.SimpleLexicalAnalyzer;
 import com.github.argon4w.rps.lexical.SimpleTokenHashMap;
 import com.github.argon4w.rps.lexical.tokens.BooleanToken;
 import com.github.argon4w.rps.lexical.tokens.UndefinedToken;
+import com.github.argon4w.rps.lexical.tokens.VaParameterToken;
 import com.github.argon4w.rps.lexical.tokens.operators.*;
 import com.github.argon4w.rps.lexical.tokens.operators.assign.*;
 import com.github.argon4w.rps.lexical.tokens.operators.bit.*;
@@ -47,6 +48,7 @@ public class RePolishCompiler {
         keywordMap = new SimpleTokenHashMap();
         compiledStacks = new ArrayList<>();
 
+        operatorMap.put("...", VaParameterToken::new);
         operatorMap.put("&&", ShortCircuitAndOperatorToken::new);
         operatorMap.put("||", ShortCircuitOrOperatorToken::new);
         operatorMap.put("&", BitAndOperatorToken::new);

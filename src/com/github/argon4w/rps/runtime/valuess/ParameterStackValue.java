@@ -9,4 +9,8 @@ public class ParameterStackValue implements IStackValue {
     public ParameterStackValue(ParalleledStackValue value) {
         this.values = new ArrayList<>(value.values);
     }
+
+    public ParameterStackValue(List<IStackValue> values) {
+        this.values = new ArrayList<>(values);
+    }
 }

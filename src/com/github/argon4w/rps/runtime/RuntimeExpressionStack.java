@@ -5,7 +5,7 @@ import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 import com.github.argon4w.rps.runtime.valuess.ParameterStackValue;
 
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class RuntimeExpressionStack extends RuntimeStack {
     public RuntimeExpressionStack(IInstruction[] instructions, RuntimeCalls runtimeCalls, RePolishRuntime runtime) {
@@ -13,7 +13,7 @@ public class RuntimeExpressionStack extends RuntimeStack {
     }
 
     @Override
-    public Map<String, IStackValue> initVariableStorage() {
+    public LinkedHashMap<String, IStackValue> initVariableStorage() {
         return parentStack.variableStorage;
     }
 

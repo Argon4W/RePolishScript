@@ -1,13 +1,25 @@
 stdlib = import "./rps_stdlib.rps";
 
-("Hello %s %s %s%n", ["RePolish", "Script", 1024]) -> $stdlib.writeFormat;
-
-input = () -> $stdlib.readLine;
-
-result = if ($input == "hello") {
-    return "Input is hello";
-} else {
-    return "Input is not hello";
+wrapper = (func) -> {
+    return ... -> {
+        "before" -> $stdlib.writeLine;
+        $parameters -> $func;
+        "after" -> $stdlib.writeLine;
+    };
 };
 
-$result -> $stdlib.writeLine;
+a = {
+    b = 110;
+    c = (d, e) -> {
+        ($b + $d * $e) -> $stdlib.writeLine;
+    };
+};
+
+d = $a.c -> $wrapper;
+(5, 2) -> $d;
+
+test = (a, b, ...) -> {
+    $parameters as list -> $stdlib.listToString -> $stdlib.writeLine;
+};
+
+(1, 2, 3, 4) -> $test;

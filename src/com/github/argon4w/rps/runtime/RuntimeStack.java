@@ -9,8 +9,7 @@ import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
 import com.github.argon4w.rps.runtime.valuess.referenced.VariableStackValue;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.Stack;
 
 public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
@@ -19,7 +18,7 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
     public final RePolishRuntime runtime;
 
     public RuntimeStack parentStack;
-    public Map<String, IStackValue> variableStorage;
+    public LinkedHashMap<String, IStackValue> variableStorage;
 
     public RuntimeStack(IInstruction[] instructions, RuntimeCalls runtimeCalls, RePolishRuntime runtime) {
         this.runtimeCalls = runtimeCalls;
@@ -34,8 +33,12 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
         return this;
     }
 
-    public Map<String, IStackValue> initVariableStorage() {
-        return new HashMap<>();
+    public LinkedHashMap<String, IStackValue> initVariableStorage() {
+        return new LinkedHashMap<>();
+    }
+
+    public boolean hasVariable(String key) {
+        return variableStorage.containsKey(key);
     }
 
     public void setVariable(String key, IStackValue value) {

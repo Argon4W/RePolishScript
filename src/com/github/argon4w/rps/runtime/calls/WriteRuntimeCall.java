@@ -3,7 +3,6 @@ package com.github.argon4w.rps.runtime.calls;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.ByteStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
 
 public class WriteRuntimeCall implements IRuntimeCall {
     @Override

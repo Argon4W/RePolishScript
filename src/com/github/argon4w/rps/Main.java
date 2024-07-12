@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) throws Throwable {
-        CompiledScript script = new RePolishCompiler().compileScript(Path.of("./rps_test_version_ice_cream.rps"));
+        CompiledScript script = new RePolishCompiler().compileScript(Path.of("./rps_test_version_1.rps"));
         RePolishRuntime runtime = new RePolishRuntime(script);
         runtime.invoke();
     }

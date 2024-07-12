@@ -4,6 +4,7 @@ import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.valuess.IListStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ITypeStackValue;
+import com.github.argon4w.rps.runtime.valuess.ParameterStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.IRangeStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.IntegerStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.ListStackValue;
@@ -18,6 +19,10 @@ public class ListTypeStackValue implements ITypeStackValue {
 
         if (value instanceof IRangeStackValue rangeValue) {
             return new ListStackValue(rangeValue.getLongNumbers().mapToObj(IntegerStackValue::new).toList());
+        }
+
+        if (value instanceof ParameterStackValue parameterValue) {
+            return new ListStackValue(parameterValue.values);
         }
 
         if (value instanceof IListStackValue) {

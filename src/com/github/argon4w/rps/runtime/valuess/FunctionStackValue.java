@@ -8,34 +8,43 @@ import java.util.List;
 public class FunctionStackValue implements IStackValue {
     public final RuntimeStack stack;
     public final List<NameStackValue> parameters;
+    public final boolean vaParameter;
 
     public FunctionStackValue(RuntimeStack stack) {
         this.stack = stack;
         this.parameters = List.of();
+        this.vaParameter = false;
     }
 
-    public FunctionStackValue(RuntimeStack stack, IStackValue value) {
-        this.stack = stack;
-        this.parameters = toNames(value instanceof ParameterStackValue parameterValue ? parameterValue.values : List.of(value));
-    }
+    public FunctionStackValue(RuntimeStack stack, IStackValue leftValue) {
+        List<IStackValue> leftValues = leftValue instanceof ParameterStackValue parameterValue ? parameterValue.values : List.of(leftValue);
+        List<NameStackValue> parameters = new ArrayList<>();
+        boolean vaParameter = false;
 
-    public List<NameStackValue> toNames(List<IStackValue> values) {
-        ArrayList<NameStackValue> names = new ArrayList<>();
+        for (IStackValue stackValue : leftValues) {
+            if (stackValue instanceof VaParameterStackValue) {
+                vaParameter = true;
+                continue;
+            }
 
-        for (IStackValue value : values) {
-            if (!(value instanceof NameStackValue nameValue)) {
-                System.out.println(value);
+            if (vaParameter) {
+                throw new IllegalStateException("Illegal parameter definition after variable parameters");
+            }
+
+            if (!(stackValue instanceof NameStackValue nameValue)) {
                 throw new IllegalStateException("Illegal parameter definition");
             }
 
-            if (names.contains(nameValue)) {
+            if (parameters.contains(nameValue)) {
                 throw new IllegalStateException("Illegal duplicated parameter definition");
             }
 
-            names.add(nameValue);
+            parameters.add(nameValue);
         }
 
-        return names;
+        this.stack = stack;
+        this.parameters = parameters;
+        this.vaParameter = vaParameter;
     }
 
     public IStackValue invoke(IStackValue value) {
@@ -53,12 +62,16 @@ public class FunctionStackValue implements IStackValue {
     public IStackValue invoke(List<IStackValue> values) {
         RuntimeStack copiedStack = stack.copyStack();
 
-        if (values.size() != parameters.size()) {
+        if (vaParameter ? values.size() < parameters.size() : values.size() != parameters.size()) {
             throw new IllegalStateException("Mismatch parameters");
         }
 
-        for (int i = 0; i < values.size(); i ++) {
+        for (int i = 0; i < parameters.size(); i ++) {
             copiedStack.setVariable(parameters.get(i).key(), values.get(i));
+        }
+
+        if (vaParameter) {
+            copiedStack.setVariable("parameters", new ParameterStackValue(values.subList(parameters.size(), values.size())));
         }
 
         copiedStack.invoke();
