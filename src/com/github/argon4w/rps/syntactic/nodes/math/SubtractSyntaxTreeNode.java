@@ -4,6 +4,8 @@ import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.math.SubtractInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
+import com.github.argon4w.rps.syntactic.nodes.operands.PushIntegerNumberSyntaxTreeNode;
+import com.github.argon4w.rps.syntactic.nodes.operands.PushPlaceholderSyntaxTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class SubtractSyntaxTreeNode implements ISyntaxTreeNode {
     @Override
     public void popFromStack(Stack<ISyntaxTreeNode> stack) {
         right = stack.pop();
-        left = stack.pop();
+        left = stack.empty() ? new PushPlaceholderSyntaxTreeNode() : stack.pop();
     }
 
     @Override

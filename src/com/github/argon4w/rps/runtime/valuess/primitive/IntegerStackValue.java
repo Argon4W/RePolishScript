@@ -102,6 +102,11 @@ public record IntegerStackValue(long value) implements INumericStackValue, IBitO
     }
 
     @Override
+    public IStackValue invert() {
+        return new IntegerStackValue(-value);
+    }
+
+    @Override
     public IStackValue bitAnd(IStackValue right) {
         if (right instanceof ByteStackValue byteValue) {
             return new IntegerStackValue(value & byteValue.getLongValue());

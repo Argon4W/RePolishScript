@@ -13,12 +13,12 @@ import java.util.Stack;
 
 public class ReversePolishSyntacticTreeBuilder {
     public final SimpleTokenHashMap tokenHashMap;
-    public final Stack<ISyntaxTreeNode> syntaxTreeNodes;
+    public final FencedSyntaxTreeNodeStack syntaxTreeNodes;
     public final Stack<IOperatorToken> operators;
 
     public ReversePolishSyntacticTreeBuilder(SimpleTokenHashMap tokenHashMap) {
         this.tokenHashMap = tokenHashMap;
-        this.syntaxTreeNodes = new Stack<>();
+        this.syntaxTreeNodes = new FencedSyntaxTreeNodeStack();
         this.operators = new Stack<>();
     }
 
@@ -66,6 +66,7 @@ public class ReversePolishSyntacticTreeBuilder {
             if (token instanceof IOperatorToken operatorToken) {
                 popLowPriorityOperators(operatorToken);
                 operators.push(operatorToken);
+                syntaxTreeNodes.setOperatorTokenFence(operatorToken);
 
                 continue;
             }
@@ -90,7 +91,10 @@ public class ReversePolishSyntacticTreeBuilder {
     }
 
     public ISyntaxTreeNode popFromOperators() {
-        ISyntaxTreeNode syntaxTreeNode = operators.pop().getSyntaxTreeNode();
+        IOperatorToken operatorToken = operators.pop();
+        ISyntaxTreeNode syntaxTreeNode = operatorToken.getSyntaxTreeNode();
+
+        syntaxTreeNodes.resetOperatorTokenFence(operatorToken);
         syntaxTreeNode.popFromStack(syntaxTreeNodes);
 
         return syntaxTreeNode;

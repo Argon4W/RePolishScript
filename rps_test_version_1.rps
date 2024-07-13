@@ -9,7 +9,7 @@ wrapper = (func) -> {
 };
 
 a = {
-    b = 110;
+    b = -110;
     c = (d, e) -> {
         ($b + $d * $e) -> $stdlib.writeLine;
     };
@@ -19,7 +19,7 @@ d = $a.c -> $wrapper;
 (5, 2) -> $d;
 
 test = (a, b, ...) -> {
-    $parameters as list -> $stdlib.listToString -> $stdlib.writeLine;
+    ("hello: %s%n", $parameters as list -> $stdlib.listToString) -> $stdlib.writeFormat;
 };
 
 (1, 2, 3, 4) -> $test;

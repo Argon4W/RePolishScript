@@ -50,11 +50,15 @@ writeLine = (value) -> {
     ($value + "\n") -> $stringToBytes -> $writeBytes;
 };
 
-writeFormat = (value, fmt) -> {
-    ($value, $fmt) -> $formatString -> $stringToBytes -> $writeBytes;
+writeFormat = (value, ...) -> {
+    ($value, $parameters as list) -> $formatStringList -> $stringToBytes -> $writeBytes;
 };
 
-formatString = (value, fmt) -> {
+formatString = (value, ...) -> {
+    return ($value, $parameters as list) -> $formatStringList;
+};
+
+formatStringList = (value, fmt) -> {
     index = 0;
     result = "";
     state = false;

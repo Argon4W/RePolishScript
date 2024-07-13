@@ -106,6 +106,11 @@ public record ByteStackValue(byte value) implements INumericStackValue, IBitOper
     }
 
     @Override
+    public IStackValue invert() {
+        return new IntegerStackValue(-getLongValue());
+    }
+
+    @Override
     public IStackValue bitAnd(IStackValue right) {
         if (right instanceof ByteStackValue byteValue) {
             return new IntegerStackValue(getLongValue() & byteValue.value());

@@ -97,6 +97,11 @@ public record FloatingPointNumberStackValue(double value) implements INumericSta
     }
 
     @Override
+    public IStackValue invert() {
+        return new FloatingPointNumberStackValue(-value);
+    }
+
+    @Override
     public int compare(IStackValue right) {
         if (right instanceof FloatingPointNumberStackValue floatValue) {
             return Double.compare(value, floatValue.value);

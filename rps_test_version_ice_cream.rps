@@ -68,7 +68,7 @@ weightOfLightCreamInIceCream = $e / $f;
 weightOfMilkInIceCream = $a - $b * $weightOfLightCreamInIceCream;
 weightOfAdditionalSolidsInIceCream = $weightOfIceCream - $weightOfLightCreamInIceCream - $weightOfMilkInIceCream - $weightOfSyrupInIceCream -$weightOfExtraIngredient;
 
-("The weight of syrup in the ice cream is: %sg%n", [$weightOfSyrupInIceCream]) -> $stdlib.writeFormat;
-("The weight of milk in the ice cream is: %sg%n", [$weightOfMilkInIceCream]) -> $stdlib.writeFormat;
-("The weight of light cream in the ice cream is: %sg%n", [$weightOfLightCreamInIceCream]) -> $stdlib.writeFormat;
-("The weight of additional solids in the ice cream is: %sg%n", [$weightOfAdditionalSolidsInIceCream]) -> $stdlib.writeFormat;
+("The weight of syrup in the ice cream is: %sg%n", $weightOfSyrupInIceCream) -> $stdlib.writeFormat;
+("The weight of milk in the ice cream is: %sg%n", $weightOfMilkInIceCream) -> $stdlib.writeFormat;
+("The weight of light cream in the ice cream is: %sg%n", $weightOfLightCreamInIceCream) -> $stdlib.writeFormat;
+("The weight of additional solids in the ice cream is: %sg%n", $weightOfAdditionalSolidsInIceCream) -> $stdlib.writeFormat;

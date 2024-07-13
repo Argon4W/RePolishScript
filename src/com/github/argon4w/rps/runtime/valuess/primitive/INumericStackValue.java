@@ -6,4 +6,5 @@ public interface INumericStackValue extends IAddableStackValue, IMultiplierStack
     IStackValue subtract(IStackValue right);
     IStackValue divide(IStackValue right);
     IStackValue mod(IStackValue right);
+    IStackValue invert();
 }
