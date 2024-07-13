@@ -49,8 +49,10 @@ public class RePolishCompiler {
         compiledStacks = new ArrayList<>();
 
         operatorMap.put("...", VaParameterToken::new);
+        operatorMap.put("??", ShortCircuitFallbackOperatorToken::new);
         operatorMap.put("&&", ShortCircuitAndOperatorToken::new);
         operatorMap.put("||", ShortCircuitOrOperatorToken::new);
+        operatorMap.put("?", FallbackOperatorToken::new);
         operatorMap.put("&", BitAndOperatorToken::new);
         operatorMap.put("|", BitOrOperatorToken::new);
         operatorMap.put("^", BitXOROperatorToken::new);

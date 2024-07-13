@@ -23,3 +23,11 @@ test = (a, b, ...) -> {
 };
 
 (1, 2, 3, 4) -> $test;
+
+hello = () -> {
+    "invoked" -> $stdlib.writeLine;
+    return "hello";
+};
+
+"hi" ? () -> $hello -> $stdlib.writeLine;
+null ?? () -> $hello -> $stdlib.writeLine;
