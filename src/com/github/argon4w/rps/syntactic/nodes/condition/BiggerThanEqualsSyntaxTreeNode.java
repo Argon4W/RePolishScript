@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class BiggerThanEqualsSyntaxTreeNode implements ISyntaxTreeNode {
+public class BiggerThanEqualsSyntaxTreeNode extends AbstractConditionSyntaxTreeNode {
     public ISyntaxTreeNode left;
     public ISyntaxTreeNode right;
 
@@ -20,7 +20,7 @@ public class BiggerThanEqualsSyntaxTreeNode implements ISyntaxTreeNode {
     }
 
     @Override
-    public List<IInstruction> compile(RePolishCompiler compiler) {
+    public List<IInstruction> compileNonChained(RePolishCompiler compiler) {
         List<IInstruction> instructions = new ArrayList<>();
 
         instructions.addAll(left.compile(compiler));
@@ -28,5 +28,21 @@ public class BiggerThanEqualsSyntaxTreeNode implements ISyntaxTreeNode {
         instructions.add(new BiggerThanEqualsInstruction());
 
         return instructions;
+    }
+
+    @Override
+    public ISyntaxTreeNode getRightTreeNode() {
+        return right;
+    }
+
+    @Override
+    public ISyntaxTreeNode getLeftTreeNode() {
+        return left;
+    }
+
+    @Override
+    public ISyntaxTreeNode setLeftTreeNode(ISyntaxTreeNode treeNode) {
+        left = treeNode;
+        return this;
     }
 }

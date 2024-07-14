@@ -31,3 +31,5 @@ hello = () -> {
 
 "hi" ? () -> $hello -> $stdlib.writeLine;
 null ?? () -> $hello -> $stdlib.writeLine;
+
+(1 < 2 < 3 < 4 >= 4 == 4 != 10) -> $stdlib.writeLine;

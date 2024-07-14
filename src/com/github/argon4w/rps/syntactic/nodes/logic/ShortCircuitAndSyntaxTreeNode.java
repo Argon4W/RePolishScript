@@ -14,6 +14,15 @@ public class ShortCircuitAndSyntaxTreeNode implements ISyntaxTreeNode {
     public ISyntaxTreeNode left;
     public ISyntaxTreeNode right;
 
+    public ShortCircuitAndSyntaxTreeNode() {
+
+    }
+
+    public ShortCircuitAndSyntaxTreeNode(ISyntaxTreeNode left, ISyntaxTreeNode right) {
+        this.left = left;
+        this.right = right;
+    }
+
     @Override
     public void popFromStack(Stack<ISyntaxTreeNode> stack) {
         right = stack.pop();
