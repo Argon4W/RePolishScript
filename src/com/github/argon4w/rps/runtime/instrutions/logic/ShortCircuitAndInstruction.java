@@ -9,8 +9,8 @@ import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
 public class ShortCircuitAndInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
-        IStackValue right = stack.popReversed();
-        IStackValue left = stack.popReversed();
+        IStackValue right = stack.popReserved();
+        IStackValue left = stack.popReserved();
 
         if (!(right instanceof RuntimeWrapperStack stackRight)) {
             throw new IllegalStateException("Illegal right components");

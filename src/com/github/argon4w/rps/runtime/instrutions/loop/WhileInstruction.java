@@ -11,8 +11,8 @@ import com.github.argon4w.rps.runtime.valuess.loop.BreakStackValue;
 public class WhileInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
-        IStackValue right = stack.popReversed();
-        IStackValue left = stack.popReversed();
+        IStackValue right = stack.popReserved();
+        IStackValue left = stack.popReserved();
 
         if (!(left instanceof RuntimeWrapperStack stackLeft)) {
             throw new IllegalStateException("Illegal condition");

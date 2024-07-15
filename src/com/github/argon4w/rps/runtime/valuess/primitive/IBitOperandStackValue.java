@@ -10,4 +10,5 @@ public interface IBitOperandStackValue extends IStackValue {
     IStackValue bitLeftShift(IStackValue right);
     IStackValue bitRightShift(IStackValue right);
     IStackValue bitUnsignedRightShift(IStackValue right);
+    long getLongValue();
 }

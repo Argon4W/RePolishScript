@@ -3,10 +3,9 @@ package com.github.argon4w.rps.runtime.instrutions.list;
 import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.ByteStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.IntegerStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.SimpleRangeStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.SteppedRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.INumericStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.range.SimpleRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.range.SteppedRangeStackValue;
 
 public class StepInstruction implements IInstruction {
     @Override
@@ -18,13 +17,12 @@ public class StepInstruction implements IInstruction {
             throw new IllegalStateException("Illegal left components");
         }
 
-        if (right instanceof IntegerStackValue integerRight) {
-            stack.push(new SteppedRangeStackValue(rangeLeft.start(), rangeLeft.end(), integerRight.value()));
-            return false;
+        if (!rangeLeft.canBeStepped()) {
+            throw new IllegalStateException("Illegal left components");
         }
 
-        if (right instanceof ByteStackValue byteValue) {
-            stack.push(new SteppedRangeStackValue(rangeLeft.start(), rangeLeft.end(), byteValue.value()));
+        if (right instanceof INumericStackValue numericRight) {
+            stack.push(new SteppedRangeStackValue(rangeLeft.start(), rangeLeft.end(), numericRight));
             return false;
         }
 

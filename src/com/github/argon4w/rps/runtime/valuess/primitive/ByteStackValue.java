@@ -3,7 +3,8 @@ package com.github.argon4w.rps.runtime.valuess.primitive;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 
 public record ByteStackValue(byte value) implements INumericStackValue, IBitOperandStackValue {
-    long getLongValue() {
+    @Override
+    public long getLongValue() {
         return (long) value;
     }
 

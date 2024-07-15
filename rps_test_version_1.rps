@@ -33,3 +33,7 @@ hello = () -> {
 null ?? () -> $hello -> $stdlib.writeLine;
 
 (1 < 2 < 3 < 4 >= 4 == 4 != 10) -> $stdlib.writeLine;
+
+(exclusive 1 to inclusive 11 step 3) as list -> $stdlib.listToString -> $stdlib.writeLine;
+
+[$i * 2 + 3 every i in 0 to inclusive 21 step 3 when $i > 0] -> $stdlib.listToString -> $stdlib.writeLine;

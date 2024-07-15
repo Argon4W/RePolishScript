@@ -10,7 +10,7 @@ import com.github.argon4w.rps.runtime.valuess.primitive.ConditionFailedStackValu
 public class IfInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
-        IStackValue right = stack.popReversed();
+        IStackValue right = stack.popReserved();
         IStackValue left = stack.pop();
 
         if (!(left instanceof RuntimeWrapperStack stackLeft)) {

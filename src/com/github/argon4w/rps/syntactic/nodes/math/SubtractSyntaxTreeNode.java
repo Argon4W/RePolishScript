@@ -4,7 +4,6 @@ import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.instrutions.math.SubtractInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
-import com.github.argon4w.rps.syntactic.nodes.operands.PushIntegerNumberSyntaxTreeNode;
 import com.github.argon4w.rps.syntactic.nodes.operands.PushPlaceholderSyntaxTreeNode;
 
 import java.util.ArrayList;

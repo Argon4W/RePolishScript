@@ -8,6 +8,7 @@ import com.github.argon4w.rps.runtime.valuess.primitive.SingleQuotedStringStackV
 import java.util.List;
 
 public record LoopStackStackValue(NameStackValue name, RuntimeStack value) implements ILoopStackValue {
+    @Override
     public List<? extends IStackValue> getLoopList() {
         return value.variableStorage.keySet().stream().map(SingleQuotedStringStackValue::new).toList();
     }

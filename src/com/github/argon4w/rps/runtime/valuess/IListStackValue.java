@@ -1,6 +1,6 @@
 package com.github.argon4w.rps.runtime.valuess;
 
-import com.github.argon4w.rps.runtime.valuess.primitive.IRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.range.IRangeStackValue;
 
 import java.util.List;
 

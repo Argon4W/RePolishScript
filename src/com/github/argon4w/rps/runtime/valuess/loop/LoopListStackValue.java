@@ -7,6 +7,7 @@ import com.github.argon4w.rps.runtime.valuess.NameStackValue;
 import java.util.List;
 
 public record LoopListStackValue(NameStackValue name, IListStackValue value) implements ILoopStackValue {
+    @Override
     public List<? extends IStackValue> getLoopList() {
         return value.values();
     }

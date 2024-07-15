@@ -4,6 +4,11 @@ import com.github.argon4w.rps.runtime.valuess.IStackValue;
 
 public record IntegerStackValue(long value) implements INumericStackValue, IBitOperandStackValue {
     @Override
+    public long getLongValue() {
+        return value;
+    }
+
+    @Override
     public IStackValue add(IStackValue right) {
         if (right instanceof IStringStackValue stringStackValue) {
             return new SingleQuotedStringStackValue(value + stringStackValue.value());

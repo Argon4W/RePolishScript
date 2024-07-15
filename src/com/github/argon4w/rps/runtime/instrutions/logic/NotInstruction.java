@@ -8,7 +8,7 @@ import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
 public class NotInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
-        IStackValue right = stack.popReversed();
+        IStackValue right = stack.popReserved();
 
         if (!(right instanceof BooleanStackValue booleanRight)) {
             throw new IllegalStateException("Illegal right components");

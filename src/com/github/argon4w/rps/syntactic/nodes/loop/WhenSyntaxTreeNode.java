@@ -1,23 +1,23 @@
-package com.github.argon4w.rps.syntactic.nodes.math;
+package com.github.argon4w.rps.syntactic.nodes.loop;
 
 import com.github.argon4w.rps.compiler.RePolishCompiler;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
-import com.github.argon4w.rps.runtime.instrutions.math.AddInstruction;
+import com.github.argon4w.rps.runtime.instrutions.loop.WhenInstruction;
 import com.github.argon4w.rps.syntactic.ISyntaxTreeNode;
-import com.github.argon4w.rps.syntactic.nodes.operands.PushPlaceholderSyntaxTreeNode;
+import com.github.argon4w.rps.syntactic.nodes.stack.PushWrapperStackSyntaxTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class AddSyntaxTreeNode implements ISyntaxTreeNode {
+public class WhenSyntaxTreeNode implements ISyntaxTreeNode {
     public ISyntaxTreeNode left;
     public ISyntaxTreeNode right;
 
     @Override
     public void popFromStack(Stack<ISyntaxTreeNode> stack) {
         right = stack.pop();
-        left = stack.empty() ? new PushPlaceholderSyntaxTreeNode() : stack.pop();
+        left = stack.pop();
     }
 
     @Override
@@ -25,8 +25,8 @@ public class AddSyntaxTreeNode implements ISyntaxTreeNode {
         List<IInstruction> instructions = new ArrayList<>();
 
         instructions.addAll(left.compile(compiler));
-        instructions.addAll(right.compile(compiler));
-        instructions.add(new AddInstruction());
+        instructions.addAll(new PushWrapperStackSyntaxTreeNode(List.of(right)).compile(compiler));
+        instructions.add(new WhenInstruction());
 
         return instructions;
     }

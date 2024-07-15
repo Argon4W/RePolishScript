@@ -12,6 +12,6 @@ public class ReferenceOperatorToken implements IOperatorToken {
 
     @Override
     public int getPriority() {
-        return 20;
+        return 21;
     }
 }

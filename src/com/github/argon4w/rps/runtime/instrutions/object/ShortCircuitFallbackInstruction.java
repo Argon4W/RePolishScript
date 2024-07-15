@@ -9,7 +9,7 @@ import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 public class ShortCircuitFallbackInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
-        IStackValue right = stack.popReversed();
+        IStackValue right = stack.popReserved();
         IStackValue left = stack.pop();
 
         if (!(right instanceof RuntimeWrapperStack stackRight)) {

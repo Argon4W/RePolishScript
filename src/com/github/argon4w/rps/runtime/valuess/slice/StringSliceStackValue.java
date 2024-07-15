@@ -3,6 +3,8 @@ package com.github.argon4w.rps.runtime.valuess.slice;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.*;
+import com.github.argon4w.rps.runtime.valuess.primitive.range.IRangeStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.range.SimpleRangeStackValue;
 
 import java.util.List;
 
@@ -45,8 +47,16 @@ public record StringSliceStackValue(IntArraySlice slice) implements IStringStack
             throw new IllegalStateException("Illegal range");
         }
 
-        int start = (int) simpleRangeValue.start();
-        int end = (int) simpleRangeValue.end();
+        if (!(simpleRangeValue.start() instanceof IBitOperandStackValue bitOperandStart)) {
+            throw new IllegalStateException("Illegal range edge");
+        }
+
+        if (!(simpleRangeValue.end() instanceof IBitOperandStackValue bitOperandEnd)) {
+            throw new IllegalStateException("Illegal range edge");
+        }
+
+        int start = (int) bitOperandStart.getLongValue();
+        int end = (int) bitOperandEnd.getLongValue();
 
         if (start < 0) {
             throw new IllegalStateException("Illegal bounds");

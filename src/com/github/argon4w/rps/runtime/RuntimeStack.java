@@ -84,7 +84,7 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
         return empty() ? new EmptyStackValue() : pop();
     }
 
-    public synchronized IStackValue popReversed() {
+    public synchronized IStackValue popReserved() {
         return super.pop();
     }
 

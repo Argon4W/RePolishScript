@@ -3,7 +3,7 @@ stdlib = import "./rps_stdlib.rps";
 fibCache = [0, 1];
 
 fib = (i) -> {
-    for (index in 0 to ($i + 1)) {
+    for (index in 0 to inclusive $i) {
         if ($index in $fibCache == null) {
             $index in $fibCache = ($index - 1) in $fibCache + ($index - 2) in $fibCache;
         };

@@ -10,7 +10,7 @@ public class SubtractAssignInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
         IStackValue right = stack.pop();
-        IStackValue left = stack.popReversed();
+        IStackValue left = stack.popReserved();
 
         if (!(left instanceof IReferencedStackValue referenceLeft)) {
             throw new IllegalStateException("Illegal left components");

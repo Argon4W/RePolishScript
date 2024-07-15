@@ -9,10 +9,8 @@ import com.github.argon4w.rps.runtime.valuess.ParalleledStackValue;
 import com.github.argon4w.rps.runtime.valuess.loop.LoopListStackValue;
 import com.github.argon4w.rps.runtime.valuess.loop.LoopRangeStackValue;
 import com.github.argon4w.rps.runtime.valuess.loop.LoopStackStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.ByteStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.IRangeStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.IStringStackValue;
-import com.github.argon4w.rps.runtime.valuess.primitive.IntegerStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.*;
+import com.github.argon4w.rps.runtime.valuess.primitive.range.IRangeStackValue;
 
 public class InInstruction implements IInstruction {
     @Override
@@ -64,6 +62,11 @@ public class InInstruction implements IInstruction {
 
         if (left instanceof IStringStackValue stringLeft && right instanceof RuntimeStack stackRight) {
             stack.push(stackRight.getVariable(stringLeft.value()));
+            return false;
+        }
+
+        if (left instanceof INumericStackValue numericLeft && right instanceof IRangeStackValue rangeRight) {
+            stack.push(new BooleanStackValue(rangeRight.isInRange(numericLeft)));
             return false;
         }
 
