@@ -4,9 +4,9 @@ import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.NameStackValue;
-import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 
-public class OfInstruction implements IInstruction {
+public class FallbackOfInstruction implements IInstruction {
     @Override
     public boolean invoke(RuntimeStack stack) {
         IStackValue right = stack.pop();
@@ -14,6 +14,11 @@ public class OfInstruction implements IInstruction {
 
         if (!(right instanceof NameStackValue nameRight)) {
             throw new IllegalStateException("Illegal right components");
+        }
+
+        if (left instanceof UndefinedStackValue) {
+            stack.push(new UndefinedStackValue());
+            return false;
         }
 
         if (!(left instanceof RuntimeStack stackLeft)) {

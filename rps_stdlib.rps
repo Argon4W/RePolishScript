@@ -1,8 +1,8 @@
-read = () -> {
+read = lazy () -> {
     return () -> $readIterator -> $iteratorToCharacter;
 };
 
-readLine = () -> {
+readLine = lazy () -> {
     result = "";
 
     isEndOfLine = (characterValue) -> {
@@ -25,7 +25,7 @@ readLine = () -> {
     return $result;
 };
 
-readIterator = () -> {
+readIterator = lazy () -> {
     return {
         hasNext = () -> {
             return true;
@@ -37,28 +37,28 @@ readIterator = () -> {
     };
 };
 
-write = (value) -> {
+write = lazy (value) -> {
     $value as string -> $stringToBytes -> $writeBytes;
 };
 
-writeBytes = (byteList) -> {
+writeBytes = lazy (byteList) -> {
     push $byteList;
     call "writeList";
 };
 
-writeLine = (value) -> {
+writeLine = lazy (value) -> {
     ($value + "\n") -> $stringToBytes -> $writeBytes;
 };
 
-writeFormat = (value, ...) -> {
+writeFormat = lazy (value, ...) -> {
     ($value, $parameters as list) -> $formatStringList -> $stringToBytes -> $writeBytes;
 };
 
-formatString = (value, ...) -> {
+formatString = lazy (value, ...) -> {
     return ($value, $parameters as list) -> $formatStringList;
 };
 
-formatStringList = (value, fmt) -> {
+formatStringList = lazy (value, fmt) -> {
     index = 0;
     result = "";
     state = false;
@@ -96,15 +96,15 @@ formatStringList = (value, fmt) -> {
     return $result;
 };
 
-byteToInteger = (byteValue) -> {
+byteToInteger = lazy (byteValue) -> {
     return $byteValue as integer & 0xFF;
 };
 
-stringToBytes = (stringValue) -> {
+stringToBytes = lazy (stringValue) -> {
     return $stringValue -> $listToIterator -> $iteratorToBytes;
 };
 
-iteratorToBytes = (iterator) -> {
+iteratorToBytes = lazy (iterator) -> {
     "222"
     result = [];
 
@@ -115,11 +115,11 @@ iteratorToBytes = (iterator) -> {
     return $result;
 };
 
-bytesToString = (byteList) -> {
+bytesToString = lazy (byteList) -> {
     return $byteList -> $listToIterator -> $iteratorToString;
 };
 
-iteratorToString = (iterator) -> {
+iteratorToString = lazy (iterator) -> {
     result = "";
 
     while (() -> $iterator.hasNext) {
@@ -129,7 +129,7 @@ iteratorToString = (iterator) -> {
     return $result;
 };
 
-characterToBytes = (characterValue) -> {
+characterToBytes = lazy (characterValue) -> {
     result = [];
     integerValue = $characterValue as integer;
 
@@ -172,7 +172,7 @@ characterToBytes = (characterValue) -> {
     };
 };
 
-iteratorToCharacter = (iterator) -> {
+iteratorToCharacter = lazy (iterator) -> {
     firstByte = () -> $iterator.next -> $byteToInteger;
 
     if ($firstByte >>> 7 == 0) {
@@ -209,7 +209,7 @@ iteratorToCharacter = (iterator) -> {
     return null;
 };
 
-listToIterator = (listValue) -> {
+listToIterator = lazy (listValue) -> {
     return {
         listCache = $listValue;
         cursor = 0;
@@ -231,7 +231,7 @@ listToIterator = (listValue) -> {
     };
 };
 
-iteratorToList = (iterator) -> {
+iteratorToList = lazy (iterator) -> {
     if ($iterator has "listCache") {
         return $iterator.listCache;
     };
@@ -245,7 +245,7 @@ iteratorToList = (iterator) -> {
     return $listValue;
 };
 
-listToString = (listValue) -> {
+listToString = lazy (listValue) -> {
     if (len $listValue == 0) {
         return "[]";
     };

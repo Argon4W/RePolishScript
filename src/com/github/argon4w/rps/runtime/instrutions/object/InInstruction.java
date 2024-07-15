@@ -70,6 +70,11 @@ public class InInstruction implements IInstruction {
             return false;
         }
 
+        if (left instanceof UndefinedStackValue) {
+            stack.push(new UndefinedStackValue());
+            return false;
+        }
+
         throw new IllegalStateException("Illegal right components");
     }
 }

@@ -6,6 +6,7 @@ import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.EmptyStackValue;
 import com.github.argon4w.rps.runtime.valuess.FunctionStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
 import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
 
 public class FunctionInstruction implements IInstruction {
@@ -13,6 +14,10 @@ public class FunctionInstruction implements IInstruction {
     public boolean invoke(RuntimeStack stack) {
         IStackValue right = stack.popReserved();
         IStackValue left = stack.pop();
+
+        if (right instanceof UndefinedStackValue) {
+            return false;
+        }
 
         if (right instanceof RuntimeExpressionStack stackRight) {
             right = stackRight.invoke();

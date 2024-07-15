@@ -3,6 +3,7 @@ package com.github.argon4w.rps.runtime;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.EmptyStackValue;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
+import com.github.argon4w.rps.runtime.valuess.LazyLoadStackValue;
 import com.github.argon4w.rps.runtime.valuess.ReturnStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
 import com.github.argon4w.rps.runtime.valuess.primitive.UndefinedStackValue;
@@ -51,7 +52,11 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
     }
 
     public IStackValue getVariableInternal(String key) {
-        return variableStorage.containsKey(key) ? new VariableStackValue(this, key, variableStorage.get(key)) : getVariableFromParent(key);
+        return variableStorage.containsKey(key) ? new VariableStackValue(this, key, getLoadedVariable(key)) : getVariableFromParent(key);
+    }
+
+    public IStackValue getLoadedVariable(String key) {
+        return variableStorage.computeIfPresent(key, (s, value) -> value instanceof LazyLoadStackValue lazyValue ? lazyValue.loadValue() : value);
     }
 
     public IStackValue getVariableFromParent(String key) {

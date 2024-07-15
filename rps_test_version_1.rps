@@ -37,3 +37,15 @@ null ?? () -> $hello -> $stdlib.writeLine;
 (exclusive 1 to inclusive 11 step 3) as list -> $stdlib.listToString -> $stdlib.writeLine;
 
 [$i * 2 + 3 every i in 0 to inclusive 21 step 3 when $i > 0] -> $stdlib.listToString -> $stdlib.writeLine;
+
+a = $somethingNull?.b;
+$a -> $stdlib.writeLine;
+
+lazyFunc = lazy () -> {
+    "lazy loaded" -> $stdlib.writeLine;
+    return "hello lazy!";
+};
+
+lazyVar = lazy () -> $lazyFunc;
+$lazyVar -> $stdlib.writeLine;
+$lazyVar -> $stdlib.writeLine;

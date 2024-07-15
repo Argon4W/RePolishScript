@@ -69,11 +69,14 @@ public class RePolishCompiler {
         operatorMap.put("<<=", BitLeftShiftAssignOperatorToken::new);
         operatorMap.put(">>=", BitRightShiftAssignOperatorToken::new);
         operatorMap.put(">>>=", BitUnsignedRightShiftAssignOperatorToken::new);
+        operatorMap.put("?=", FallbackAssignOperatorToken::new);
+        operatorMap.put("??=", ShortCircuitFallbackAssignOperatorToken::new);
         operatorMap.put("!", NotOperatorToken::new);
         operatorMap.put("~", BitNotOperatorToken::new);
         operatorMap.put(">", BiggerThanOperatorToken::new);
         operatorMap.put("<", SmallerThanOperatorToken::new);
         operatorMap.put(".", OfOperatorToken::new);
+        operatorMap.put("?.", FallbackOfOperatorToken::new);
         operatorMap.put(",", ParalleledOperatorToken::new);
         operatorMap.put("+", AddOperatorToken::new);
         operatorMap.put("-", SubtractOperatorToken::new);
@@ -115,6 +118,7 @@ public class RePolishCompiler {
         keywordMap.put("exclusive", OpenRangeEdgeOperatorToken::new);
         keywordMap.put("when", WhenOperatorToken::new);
         keywordMap.put("every", EveryOperatorToken::new);
+        keywordMap.put("lazy", LazyOperatorToken::new);
 
         keywordMap.put("boolean", BooleanTypeToken::new);
         keywordMap.put("byte", ByteTypeToken::new);
