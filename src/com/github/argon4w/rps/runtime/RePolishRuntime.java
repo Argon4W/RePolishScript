@@ -15,13 +15,11 @@ public class RePolishRuntime {
     public final RuntimeCalls runtimeCalls;
     public final RuntimeStack rootStack;
     public final HashMap<String, RePolishRuntime> importedScripts;
-    public final HashMap<Integer, RuntimeStack> preloadedStacks;
 
     public RePolishRuntime(CompiledScript compiledScript, RuntimeCalls runtimeCalls) {
         this.compiledScript = compiledScript;
         this.runtimeCalls = runtimeCalls;
         this.importedScripts = new HashMap<>();
-        this.preloadedStacks = new HashMap<>();
         this.rootStack = new RuntimeRootStack(compiledScript.getRootStack().instructions(), runtimeCalls, this).initStack(null);
     }
 
@@ -38,11 +36,11 @@ public class RePolishRuntime {
     }
 
     public RuntimeStack requestWrapperStack(RuntimeStack caller, int index) {
-        return preloadedStacks.computeIfAbsent(index, i -> new RuntimeWrapperStack(compiledScript.getStack(i).instructions(), runtimeCalls, this)).initStack(caller);
+        return new RuntimeWrapperStack(compiledScript.getStack(index).instructions(), runtimeCalls, this).initStack(caller);
     }
 
     public RuntimeStack requestExpressionStack(RuntimeStack caller, int index) {
-        return preloadedStacks.computeIfAbsent(index, i -> new RuntimeExpressionStack(compiledScript.getStack(i).instructions(), runtimeCalls, this)).initStack(caller);
+        return new RuntimeExpressionStack(compiledScript.getStack(index).instructions(), runtimeCalls, this).initStack(caller);
     }
 
     public RuntimeStack requestArrayStack(RuntimeStack caller, int index) {
