@@ -4,7 +4,6 @@ import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.instrutions.IInstruction;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.NameStackValue;
-import com.github.argon4w.rps.runtime.valuess.referenced.IReferencedStackValue;
 
 public class OfInstruction implements IInstruction {
     @Override

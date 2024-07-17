@@ -21,5 +21,7 @@ public class WriteListRuntimeCall implements IRuntimeCall {
 
             System.out.write(byteValue.value());
         }
+
+        System.out.flush();
     }
 }

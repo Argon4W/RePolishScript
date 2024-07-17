@@ -49,3 +49,5 @@ lazyFunc = lazy () -> {
 lazyVar = lazy () -> $lazyFunc;
 $lazyVar -> $stdlib.writeLine;
 $lazyVar -> $stdlib.writeLine;
+
+(if ($it > 0) "bigger than zero" else if ($it == 0) "equals to zero" else "less than zero" given 1 as it) -> $stdlib.writeLine;

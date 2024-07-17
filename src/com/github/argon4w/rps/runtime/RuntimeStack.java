@@ -38,6 +38,10 @@ public class RuntimeStack extends Stack<IStackValue> implements IStackValue {
         return new LinkedHashMap<>();
     }
 
+    public void setParentStack(RuntimeStack parentStack) {
+        this.parentStack = parentStack;
+    }
+
     public boolean hasVariable(String key) {
         return variableStorage.containsKey(key);
     }

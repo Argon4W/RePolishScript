@@ -14,5 +14,6 @@ public class WriteRuntimeCall implements IRuntimeCall {
         }
 
         System.out.write(byteValue.value());
+        System.out.flush();
     }
 }

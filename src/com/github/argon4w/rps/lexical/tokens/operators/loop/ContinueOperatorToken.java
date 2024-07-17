@@ -7,7 +7,7 @@ import com.github.argon4w.rps.syntactic.nodes.loop.ContinueSyntaxTreeNode;
 public class ContinueOperatorToken implements IOperatorToken {
     @Override
     public int getPriority() {
-        return 4;
+        return 2;
     }
 
     @Override

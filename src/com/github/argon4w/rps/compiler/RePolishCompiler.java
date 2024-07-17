@@ -119,6 +119,7 @@ public class RePolishCompiler {
         keywordMap.put("when", WhenOperatorToken::new);
         keywordMap.put("every", EveryOperatorToken::new);
         keywordMap.put("lazy", LazyOperatorToken::new);
+        keywordMap.put("given", GivenOperatorToken::new);
 
         keywordMap.put("boolean", BooleanTypeToken::new);
         keywordMap.put("byte", ByteTypeToken::new);

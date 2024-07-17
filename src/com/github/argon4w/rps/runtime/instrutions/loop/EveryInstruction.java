@@ -28,7 +28,8 @@ public class EveryInstruction implements IInstruction {
             stackLeft.setVariable(loopRight.name().key(), value);
             stackLeft.invoke();
 
-            return stackLeft.popResult();
+            IStackValue result = stackLeft.popResult();
+            return result instanceof RuntimeStack stackValue ? stackValue.popReturnedResult() : result;
         }).toList();
 
         stack.push(new ParalleledStackValue(list));

@@ -1,8 +1,10 @@
 package com.github.argon4w.rps.runtime.valuess.loop;
 
+import com.github.argon4w.rps.runtime.RuntimeStack;
 import com.github.argon4w.rps.runtime.RuntimeWrapperStack;
 import com.github.argon4w.rps.runtime.valuess.IStackValue;
 import com.github.argon4w.rps.runtime.valuess.NameStackValue;
+import com.github.argon4w.rps.runtime.valuess.primitive.BooleanStackValue;
 
 import java.util.List;
 
@@ -19,7 +21,13 @@ public record ConditionalLoopStackValue(ILoopStackValue loopValue, RuntimeWrappe
         condition.setVariable(loopValue.name().key(), value);
         condition.invoke();
 
-        return condition.popBooleanResult();
+        IStackValue result = condition.popResult();
+
+        if (result instanceof RuntimeStack stackValue) {
+            result = stackValue.popReturnedResult();
+        }
+
+        return result instanceof BooleanStackValue booleanValue && booleanValue.value();
     }
 
     @Override

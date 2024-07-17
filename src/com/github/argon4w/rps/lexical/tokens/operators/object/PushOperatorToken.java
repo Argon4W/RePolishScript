@@ -7,7 +7,7 @@ import com.github.argon4w.rps.syntactic.nodes.PushSyntaxTreeNode;
 public class PushOperatorToken implements IOperatorToken {
     @Override
     public int getPriority() {
-        return 4;
+        return 2;
     }
 
     @Override
